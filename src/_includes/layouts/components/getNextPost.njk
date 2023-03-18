@@ -1,0 +1,11 @@
+{% set previousPost = collections.sortedByTitle | getPreviousCollectionItem(page) %}
+{% set nextPost = collections.sortedByTitle | getNextCollectionItem(page) %}
+
+<div class="nav">
+    {% if previousPost %}
+        <a class="nav__item nav__item--prev" href="{{ previousPost.url }}">{{ previousPost.data.title }}</a>
+    {% endif %}
+    {% if nextPost %}
+        <a class="nav__item nav__item--next" href="{{ nextPost.url }}">{{ nextPost.data.title }}</a>
+    {% endif %}
+</div>

@@ -1,0 +1,30 @@
+.nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem 0 4rem 0rem;
+    width: 100%;
+    &__item {
+        border-radius: 0.3rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        opacity: 0.8;
+        padding: 1rem;
+        text-decoration: none !important;
+        transition: opacity 0.3s ease-in-out;
+        border: 0.1rem solid rgba(95, 98, 100, 0.251);
+        box-shadow: 0 3px 5px rgb(0 0 0 / 18%);
+        width: 40%;
+        @media screen and (max-width: 35em) {
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+        &:hover {
+            opacity: 1;
+            background-color: hsla(200, 1%, 43%, 0.188);
+        }
+    }
+    @media screen and (max-width: 35em) {
+        flex-direction: column;
+    }
+}

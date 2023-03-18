@@ -1,0 +1,104 @@
+:where(*, *::before, *::after) {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: 0 solid #e2e8f0;
+}
+
+:where(html) {
+    color-scheme: dark light;
+    -webkit-text-size-adjust: none;
+}
+
+:where([hidden]) {
+    display: none !important;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    :where(html:focus-within) {
+        scroll-behavior: smooth;
+    }
+}
+
+:where(body) {
+    min-height: 100vh;
+    min-height: 100dvh;
+    line-height: 1.5;
+    font-family: system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeSpeed;
+}
+
+:where(input, button, textarea, select) {
+    font: inherit;
+    color: inherit;
+}
+
+:where(textarea) {
+    resize: vertical;
+}
+
+:where(label:has(> input:disabled), label:has(+ input:disabled)) {
+    cursor: not-allowed;
+}
+
+:where(button) {
+    border-style: solid;
+}
+
+:where(a) {
+    text-underline-offset: 0.2ex;
+    color: #6366f1;
+}
+
+:where(ul, ol) {
+    list-style: none;
+}
+
+:where(img, svg, video, canvas, audio, iframe, embed, object) {
+    display: block;
+}
+
+:where(img, picture, svg) {
+    max-width: 100%;
+    height: auto;
+}
+
+:where(p, h1, h2, h3, h4, h5, h6) {
+    overflow-wrap: break-word;
+}
+
+:where(h1, h2, h3) {
+    line-height: calc(1em + 0.5rem);
+}
+
+:where(hr) {
+    border-width: 1px 0 0 0;
+    color: inherit;
+    height: 0;
+    overflow: visible;
+}
+
+:where(:focus-visible) {
+    outline: 2px dashed var(--focus-color, Highlight);
+    outline-offset: 2px;
+}
+
+:where(.visually-hidden:not(:where(:focus, :active, .not-visually-hidden))) {
+    clip-path: inset(50%) !important;
+    height: 1px !important;
+    width: 1px !important;
+    overflow: hidden !important;
+    position: absolute !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+a:is(:visited, :link, :hover, :focus-within) {
+    text-decoration: underline;
+    text-underline-position: under;
+}
+
+a {
+    color: #70b5f9;
+}

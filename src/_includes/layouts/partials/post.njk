@@ -1,0 +1,13 @@
+---
+layout: layouts/base-home.njk
+---
+
+<div class="header">
+    <a class="header__link" href="/">[ accessibility-tips ]</a>
+</div>
+<div class="post">
+    <h1 class="post__heading">{{ title }}</h1>
+    <div class="post__content">{{ content | safe }}</div>
+    <p class="post__thanksmsg">Thank you so much for reading my article.😊</p>
+</div>
+{% include 'layouts/components/getNextPost.njk' %}

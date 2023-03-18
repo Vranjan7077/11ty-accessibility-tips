@@ -1,0 +1,48 @@
+.card__item {
+    background-position: center left;
+    background-repeat: no-repeat;
+    background-position-x: 0.5rem;
+    border-radius: 0.5rem;
+    margin: 15px auto;
+    padding: 1rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border: 2px dashed #1a202c;
+    @media only screen and (max-width: 30rem) {
+        border: 2px dashed #e2e8f0;
+    }
+    &:hover {
+        box-shadow: 0 3px 5px rgb(0 0 0 / 18%);
+        transition: 0.2s ease-in-out;
+        border: 2px dashed #e2e8f0;
+    }
+}
+
+.card__link {
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.25;
+    text-align: center;
+    text-decoration: none !important;
+    margin-bottom: 0.5em;
+    &:hover {
+        text-decoration: underline !important;
+    }
+    @media only screen and (max-width: 30rem) {
+        font-size: inherit;
+    }
+}
+
+.card__topics {
+    font-size: 0.8rem;
+    font-style: italic;
+    margin: 0.65rem auto;
+}
+
+.card__item:hover .tag-post {
+    --tw-bg-opacity: 1;
+    background-color: rgb(107 114 128 / var(--tw-bg-opacity));
+    color: white !important;
+}

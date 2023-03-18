@@ -1,0 +1,6 @@
+{%- for post in collections.sortedByTitle -%}
+    <article class="card__item">
+        <a class="card__link" href="{{ post.url }}">{{ post.data.title }}</a>
+        <div class="card__topics tag-post">{{ post.data.topics }}</div>
+    </article>
+{%- endfor -%}

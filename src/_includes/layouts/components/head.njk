@@ -1,0 +1,10 @@
+<head>
+    {% set renderTitle = renderData.title or title or metadata.title %}
+    {% set renderDescription = renderData.description or description or metadata.description %}
+    {% set renderKeywords = renderData.keywords or keywords or metadata.keywords%}
+    <title>
+        {{ renderTitle }}
+    </title>
+    {% include 'layouts/components/meta.njk' %}
+    {% block head %}{% endblock %}
+</head>

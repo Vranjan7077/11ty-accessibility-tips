@@ -1,0 +1,15 @@
+@use '../abstracts/' as *;
+
+html,
+html:focus-within {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: $bg-color-100;
+    font-family: $font-stack-nunito;
+    color: $color-100;
+    font-size: 1rem;
+    text-rendering: optimizeSpeed;
+    line-height: 1.5;
+}

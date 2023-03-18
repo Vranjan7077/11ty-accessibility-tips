@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" {% if section %} data-current="{{ section }}"{% endif %} lang="en">
+    {% include "layouts/components/head.njk" %}
+    <body>
+        <div class="container" role="main">
+            {% block content %}
+                {{ content | safe }}
+            {% endblock content %}
+        </div>
+    </body>
+</html>

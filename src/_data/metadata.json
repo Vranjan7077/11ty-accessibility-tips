@@ -1,0 +1,19 @@
+{
+    "title": "Accessibility Tips",
+    "url": "https://accessibilitytips.netlify.app/",
+    "description": "The accessibility tips , tricks and tools used in frontend development",
+    "keywords": ["CSS", "frontend", "good practice", "tip", "trick", "accessibility"],
+    "feed": {
+        "subtitle": "The accessibility tips , tricks and tools used in frontend development",
+        "filename": "feed.xml",
+        "path": "/feed/feed.xml",
+        "url": "https://accessibilitytips.netlify.app/",
+        "id": "https://accessibilitytips.netlify.app/"
+    },
+    "locale": "en_us",
+    "domain": "https://accessibilitytips.netlify.app/",
+    "repo": "https://github.com/Vranjan7077/accessibility-tips#readme",
+    "author": {
+        "name": "Vinay Ranjan"
+    }
+}

@@ -1,0 +1,80 @@
+:root {
+    --container-width: auto;
+    @media screen and (min-width: 1024px) {
+        --container-width: 48rem;
+        --post__heading-font-size: 2.5rem;
+        --post__content-heading-line-height: 1.5;
+        --hero-margin: 3rem;
+        --hero-width: 75%;
+        --hero__heading-font-size: 2.5rem;
+    }
+}
+
+.container {
+    margin: 0 auto;
+    padding: 0 1rem;
+    width: var(--container-width);
+}
+
+.post {
+    margin: 2rem 0 2rem 0;
+    padding: 2rem 1rem 1rem 1rem;
+    position: relative;
+    &__heading {
+        color: #6366f1;
+        font-size: var(--post__heading-font-size);
+        font-weight: 700;
+        line-height: var(--post__heading-line-height);
+        text-align: center;
+        @media only screen and (max-width: 30rem) {
+            font-size: 2.5rem;
+        }
+    }
+    &__content {
+        line-height: 1.5;
+        margin: 2rem 0 2rem 0;
+    }
+    &__content p,
+    &__thanksmsg {
+        margin: 1rem 0;
+    }
+}
+
+.hero {
+    margin: var(--hero-margin) auto;
+    text-align: center;
+    width: var(--hero-width);
+    &__heading {
+        font-size: var(--hero__heading-font-size);
+        font-weight: 700;
+        line-height: 1.25;
+        margin: 2rem auto;
+        text-align: center;
+        @media only screen and (max-width: 30rem) {
+            font-size: 2.5rem;
+        }
+    }
+}
+
+.header {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+}
+
+.tag-post {
+    background-color: #272822;
+    border-bottom: none;
+    border-radius: 0.25em;
+    display: inline-block;
+    font-size: 0.625em;
+    height: 2em;
+    letter-spacing: 0.1em;
+    line-height: 2em;
+    margin: 0 0.5em;
+    padding: 0 0.5em;
+    text-decoration: none;
+    text-transform: uppercase;
+    vertical-align: middle;
+}
