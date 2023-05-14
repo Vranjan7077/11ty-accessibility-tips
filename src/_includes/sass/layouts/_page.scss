@@ -78,3 +78,16 @@
     text-transform: uppercase;
     vertical-align: middle;
 }
+
+footer {
+    width: min(25ch, 100% - 4rem);
+    margin-inline: auto;
+    margin: 2rem auto;
+    span {
+        a {
+            text-decoration: none !important;
+            margin: auto 5px;
+            color: inherit !important;
+        }
+    }
+}
