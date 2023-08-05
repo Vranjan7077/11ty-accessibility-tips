@@ -3,6 +3,10 @@ title: Good articles and resources on accessibility
 topics: Blog
 ---
 
+## Websites
+
+-   [Accessible Web Dev](https://accessibleweb.dev/)
+
 ## Blogs
 
 -   [Sara Soudein](https://www.sarasoueidan.com/blog/)
