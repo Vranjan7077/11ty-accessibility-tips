@@ -2,12 +2,16 @@
 layout: layouts/base-home.njk
 ---
 
-<div class="header">
-    <a class="header__link" href="/">[ accessibility-tips ]</a>
-</div>
+{% include 'layouts/components/breadcrumbs.njk' %}
 <div class="post">
     <h1 class="post__heading">{{ title }}</h1>
+    <div class="post__meta">
+        <span class="tag-post">{{ topics }}</span>
+    </div>
     <div class="post__content">{{ content | safe }}</div>
-    <p class="post__thanksmsg">Thank you so much for reading my article.😊</p>
+    <div class="post__cta">
+        <p class="post__cta-text">If you found this helpful, share it with someone who's building for the web.</p>
+        <p class="post__cta-author">- {{ metadata.author.name }}</p>
+    </div>
 </div>
 {% include 'layouts/components/getNextPost.njk' %}

@@ -14,6 +14,6 @@ module.exports = markdownIt(markdown).use(markdownItAnchor, {
         class: 'heading-anchor',
         safariReaderFix: true,
         symbol: '#',
-        level: [1, 2, 3],
+        level: [2, 3],
     }),
 });

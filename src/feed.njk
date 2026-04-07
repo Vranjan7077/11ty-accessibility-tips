@@ -8,7 +8,7 @@ eleventyExcludeFromCollections: true
     <subtitle>{{ metadata.feed.subtitle }}</subtitle>
     <link href="{{ metadata.feed.url }}" rel="self"/>
     <link href="{{ metadata.url }}"/>
-    <updated>{{ collections.post | rssLastUpdatedDate }}</updated>
+    <updated>{{ collections.post | getNewestCollectionItemDate | dateToRfc3339 }}</updated>
     <id>{{ metadata.feed.id }}</id>
     <author>
         <name>{{ metadata.author.name }}</name>

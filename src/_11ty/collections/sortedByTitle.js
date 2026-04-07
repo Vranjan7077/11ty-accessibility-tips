@@ -1,11 +1,7 @@
 module.exports = function sortedByTitle(collectionApi) {
     return collectionApi
-        .getAll()
-        .filter(function (item) {
-            let extension = item.inputPath.split('.').pop();
-            return extension === 'md';
-        })
+        .getFilteredByTag('post')
         .sort(function (a, b) {
-            return a.data.title - b.data.title;
+            return a.data.title.localeCompare(b.data.title);
         });
 };

@@ -1,14 +1,8 @@
-/* 
-   ==========================================================================
-                              #Media queries
-   ========================================================================== 
-*/
-$phones: min-width 576px; /* landscape phones, 576px and up */
-$tablet: min-width 768px; /* tablets, 768px and up */
-$desktops: min-width 1025px; /* desktops, 1024px and up */
-$wide-screens: min-width 1200px; /* large desktops, 1200px and up */
+$phones: min-width 576px;
+$tablet: min-width 768px;
+$desktops: min-width 1025px;
+$wide-screens: min-width 1200px;
 
-// Custom
 $mobile-only: max-width 767.98px;
 $tablet-only: (min-width 768px) (max-width 1024.98px);
 $mobile-tablet: max-width 1024.98px;

@@ -1,0 +1,32 @@
+{% if eleventyNavigation and eleventyNavigation.key and eleventyNavigation.key != 'Home' %}
+    {% set homeUrl = '/' | url %}
+    {% set breadcrumbEntries = collections.all | eleventyNavigationBreadcrumb(eleventyNavigation.key, { includeSelf: true }) %}
+    {% set showHomeLink = true %}
+
+    {% if breadcrumbEntries and breadcrumbEntries.length and breadcrumbEntries[0].url == homeUrl %}
+        {% set showHomeLink = false %}
+    {% endif %}
+
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol class="breadcrumbs__list">
+            {% if showHomeLink %}
+                <li class="breadcrumbs__item">
+                    <a class="breadcrumbs__link" href="{{ homeUrl }}">Home</a>
+                </li>
+            {% endif %}
+            {% for item in breadcrumbEntries %}
+                {% set breadcrumbTitle = item.title %}
+                {% if item.key == 'Tips' %}
+                    {% set breadcrumbTitle = 'Tips' %}
+                {% endif %}
+                <li class="breadcrumbs__item">
+                    {% if loop.last %}
+                        <span class="breadcrumbs__link breadcrumbs__link--current" aria-current="page">{{ breadcrumbTitle }}</span>
+                    {% else %}
+                        <a class="breadcrumbs__link" href="{{ item.url | url }}">{{ breadcrumbTitle }}</a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ol>
+    </nav>
+{% endif %}

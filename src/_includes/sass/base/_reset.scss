@@ -2,11 +2,10 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    border: 0 solid #e2e8f0;
 }
 
 :where(html) {
-    color-scheme: dark light;
+    color-scheme: dark;
     -webkit-text-size-adjust: none;
 }
 
@@ -48,7 +47,7 @@
 
 :where(a) {
     text-underline-offset: 0.2ex;
-    color: #6366f1;
+    color: inherit;
 }
 
 :where(ul, ol) {
@@ -92,13 +91,4 @@
     position: absolute !important;
     white-space: nowrap !important;
     border: 0 !important;
-}
-
-a:is(:visited, :link, :hover, :focus-within) {
-    text-decoration: underline;
-    text-underline-position: under;
-}
-
-a {
-    color: #70b5f9;
 }

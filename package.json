@@ -1,63 +1,65 @@
 {
     "name": "accessibility-tips",
-    "version": "1.0.0",
-    "main": "index.html",
-    "description": "Tips, tricks and best practices related to accessibility",
+    "version": "2.0.0",
+    "private": true,
+    "description": "Best practices, tips, and code examples for building inclusive, accessible web applications — covering WCAG, ARIA, HTML semantics, and assistive technology testing.",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/Vranjan7077/accessibility-tips.git"
     },
     "keywords": [
-        "CSS",
-        "frontend",
-        "good practice",
-        "tip",
-        "trick",
-        "accessibility"
+        "accessibility",
+        "a11y",
+        "wcag",
+        "aria",
+        "screen-reader",
+        "keyboard-navigation",
+        "inclusive-design",
+        "eleventy",
+        "html",
+        "css",
+        "javascript"
     ],
     "author": {
         "name": "Vinay Ranjan",
         "url": "https://vranjan.dev/"
     },
-    "license": "ISC",
+    "license": "MIT",
     "bugs": {
         "url": "https://github.com/Vranjan7077/accessibility-tips/issues"
     },
-    "homepage": "https://github.com/Vranjan7077/accessibility-tips#readme",
+    "homepage": "https://accessibilitytips.netlify.app",
     "scripts": {
-        "clean": "rimraf public",
-        "format": "prettier --write **/*.{js,s?css} !public",
-        "watch:sass": "sass  --no-source-map --watch src/_includes/sass:src/_includes/css",
+        "clean": "rimraf public src/css/main.css src/css/vendors",
+        "format": "prettier --write \"**/*.{js,scss}\" \"!public\"",
+        "watch:sass": "sass --no-source-map --watch src/_includes/sass:src/css",
         "watch:eleventy": "eleventy --serve",
-        "build:sass": "sass  --no-source-map src/_includes/sass:src/_includes/css",
+        "watch:open": "sleep 3 && start http://localhost:3000",
+        "build:sass": "sass --no-source-map src/_includes/sass:src/css",
         "build:eleventy": "eleventy",
-        "build:css": "postcss src/_includes/css/*.css -u autoprefixer cssnano -r --no-map",
+        "build:css": "postcss src/css/*.css -u autoprefixer cssnano -r --no-map",
         "start": "npm-run-all clean build:sass build:css --parallel watch:*",
-        "build": "npm-run-all clean build:sass build:css build:eleventy",
-        "debug": "DEBUG=* eleventy",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "build": "npm-run-all clean build:sass build:css build:eleventy"
+    },
+    "dependencies": {
+        "@11ty/eleventy": "^3.1.5",
+        "@11ty/eleventy-navigation": "^1.0.5",
+        "@11ty/eleventy-plugin-rss": "^2.0.4",
+        "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2",
+        "markdown-it": "^14.1.1",
+        "markdown-it-anchor": "^9.2.0"
     },
     "devDependencies": {
-        "@11ty/eleventy-navigation": "^0.3.2",
-        "@11ty/eleventy-plugin-rss": "^1.2.0",
-        "@11ty/eleventy-plugin-syntaxhighlight": "^4.2.0",
         "autoprefixer": "^10.4.13",
-        "breakpoint-sass": "^3.0.0",
         "clean-css": "^5.3.1",
-        "cssnano": "^5.1.14",
+        "cssnano": "^7.1.4",
+        "fast-glob": "^3.3.3",
         "html-minifier": "^4.0.0",
         "npm-run-all": "^4.1.5",
         "postcss": "^8.4.20",
-        "postcss-cli": "^10.1.0",
-        "prettier": "^2.8.1",
-        "rimraf": "^3.0.2",
-        "sass": "^1.57.1",
-        "terser": "^5.16.1"
-    },
-    "dependencies": {
-        "@11ty/eleventy": "^1.0.2",
-        "@11ty/eleventy-fetch": "^3.0.0",
-        "markdown-it": "^13.0.1",
-        "markdown-it-anchor": "^8.6.6"
+        "postcss-cli": "^11.0.1",
+        "prettier": "^3.8.1",
+        "rimraf": "^6.1.3",
+        "sass": "^1.99.0"
     }
 }

@@ -1,17 +1,17 @@
 {
     "title": "Accessibility Tips",
-    "url": "https://accessibilitytips.netlify.app/",
-    "description": "The accessibility tips , tricks and tools used in frontend development",
-    "keywords": ["CSS", "frontend", "good practice", "tip", "trick", "accessibility"],
+    "url": "https://accessibilitytips.netlify.app",
+    "description": "Learn accessibility best practices for front-end development. Tips on ARIA, semantic HTML, keyboard navigation, color contrast, and WCAG compliance.",
+    "keywords": ["accessibility", "a11y", "WCAG", "ARIA", "semantic HTML", "screen reader", "keyboard navigation", "color contrast", "CSS accessibility", "frontend", "web development"],
     "feed": {
-        "subtitle": "The accessibility tips , tricks and tools used in frontend development",
+        "subtitle": "Accessibility tips, tricks and tools for front-end development",
         "filename": "feed.xml",
         "path": "/feed/feed.xml",
-        "url": "https://accessibilitytips.netlify.app/",
+        "url": "https://accessibilitytips.netlify.app/feed/feed.xml",
         "id": "https://accessibilitytips.netlify.app/"
     },
-    "locale": "en_us",
-    "domain": "https://accessibilitytips.netlify.app/",
+    "locale": "en_US",
+    "domain": "https://accessibilitytips.netlify.app",
     "repo": "https://github.com/Vranjan7077/accessibility-tips#readme",
     "author": {
         "name": "Vinay Ranjan"

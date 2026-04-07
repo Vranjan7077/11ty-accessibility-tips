@@ -1,10 +1,53 @@
 <head>
     {% set renderTitle = renderData.title or title or metadata.title %}
     {% set renderDescription = renderData.description or description or metadata.description %}
-    {% set renderKeywords = renderData.keywords or keywords or metadata.keywords%}
-    <title>
-        {{ renderTitle }}
-    </title>
+    {% set renderKeywords = renderData.keywords or keywords or metadata.keywords %}
+    {% set isPost = layout == 'layouts/partials/post.njk' %}
+
+    <title>{% if isPost %}{{ renderTitle }} — {{ metadata.title }}{% else %}{{ renderTitle }}{% endif %}</title>
+
     {% include 'layouts/components/meta.njk' %}
+
+    {% if isPost %}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "{{ renderTitle }}",
+        "description": "{{ renderDescription | truncate(160) }}",
+        "author": {
+            "@type": "Person",
+            "name": "{{ metadata.author.name }}",
+            "url": "https://vranjan.dev/"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "{{ metadata.title }}",
+            "url": "{{ metadata.url }}"
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "{{ metadata.url }}{{ page.url }}"
+        },
+        "url": "{{ metadata.url }}{{ page.url }}"
+    }
+    </script>
+    {% else %}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "{{ metadata.title }}",
+        "description": "{{ renderDescription }}",
+        "url": "{{ metadata.url }}",
+        "author": {
+            "@type": "Person",
+            "name": "{{ metadata.author.name }}",
+            "url": "https://vranjan.dev/"
+        }
+    }
+    </script>
+    {% endif %}
+
     {% block head %}{% endblock %}
 </head>

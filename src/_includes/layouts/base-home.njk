@@ -2,16 +2,15 @@
 <html class="scroll-smooth" {% if section %} data-current="{{ section }}"{% endif %} lang="en">
     {% include "layouts/components/head.njk" %}
     <body>
-        <div class="container" role="main">
+        <a href="#main-content" class="skip-link">Skip to main content</a>
+        <main id="main-content" class="container">
             {% block content %}
                 {{ content | safe }}
             {% endblock content %}
-        </div>
+        </main>
         <footer>
-            <i class="far fa-copyright"></i> 2023
-            <span>
-                <a href="https://vranjan.dev/">VR</a>All rights reserved.
-            </span>
+            <span>&copy; {% year %} <a href="https://vranjan.dev/">Vinay Ranjan</a></span>
+            <span>&middot; All rights reserved.</span>
         </footer>
     </body>
 </html>

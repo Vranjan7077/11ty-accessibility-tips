@@ -11,5 +11,42 @@ body {
     color: $color-100;
     font-size: 1rem;
     text-rendering: optimizeSpeed;
-    line-height: 1.5;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+a {
+    color: $color-accent;
+    text-decoration: none;
+    transition: color $transition-fast;
+
+    &:hover {
+        color: #9ecbfb;
+    }
+}
+
+::selection {
+    color: #fff;
+    background-color: $color-primary-dim;
+}
+
+.skip-link {
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.75rem 1.5rem;
+    background-color: $color-primary;
+    color: #fff;
+    font-weight: $font-weight-bold;
+    font-size: 0.95rem;
+    border-radius: 0 0 0.5rem 0.5rem;
+    z-index: 9999;
+    transition: top $transition-fast;
+    text-decoration: none;
+
+    &:focus {
+        top: 0;
+        color: #fff;
+    }
 }

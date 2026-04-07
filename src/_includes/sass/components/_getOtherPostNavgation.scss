@@ -1,29 +1,60 @@
+@use '../abstracts/' as *;
+
 .nav {
     display: flex;
     justify-content: space-between;
-    padding: 2rem 0 4rem 0rem;
+    gap: $space-md;
+    padding: $space-xl 0 $space-3xl;
     width: 100%;
+
+    &__label {
+        display: block;
+        font-size: 0.75rem;
+        font-weight: $font-weight-bold;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: $color-300;
+        margin-bottom: $space-xs;
+    }
+
+    &__title {
+        font-size: 0.95rem;
+        color: $color-accent;
+        transition: color $transition-fast;
+    }
+
     &__item {
-        border-radius: 0.3rem;
+        border-radius: 0.75rem;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
-        opacity: 0.8;
-        padding: 1rem;
-        text-decoration: none !important;
-        transition: opacity 0.3s ease-in-out;
-        border: 0.1rem solid rgba(95, 98, 100, 0.251);
-        box-shadow: 0 3px 5px rgb(0 0 0 / 18%);
-        width: 40%;
+        justify-content: flex-start;
+        padding: $space-md $space-lg;
+        text-decoration: none;
+        transition: background-color $transition-base, border-color $transition-base, transform $transition-base;
+        border: 1px solid $color-border;
+        width: 48%;
+
+        &--next {
+            text-align: right;
+            margin-left: auto;
+        }
+
         @media screen and (max-width: 35em) {
             width: 100%;
-            margin-bottom: 1rem;
+            margin-bottom: $space-sm;
         }
+
         &:hover {
-            opacity: 1;
-            background-color: hsla(200, 1%, 43%, 0.188);
+            background-color: $color-surface-hover;
+            border-color: $color-border-hover;
+            transform: translateY(-1px);
+
+            .nav__title {
+                color: $color-primary;
+            }
         }
     }
+
     @media screen and (max-width: 35em) {
         flex-direction: column;
     }

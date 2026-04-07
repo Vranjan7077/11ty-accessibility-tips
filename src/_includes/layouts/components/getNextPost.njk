@@ -1,11 +1,17 @@
-{% set previousPost = collections.sortedByTitle | getPreviousCollectionItem(page) %}
-{% set nextPost = collections.sortedByTitle | getNextCollectionItem(page) %}
+{% set previousPost = collections.sortedByDate | getPreviousCollectionItem(page) %}
+{% set nextPost = collections.sortedByDate | getNextCollectionItem(page) %}
 
 <div class="nav">
     {% if previousPost %}
-        <a class="nav__item nav__item--prev" href="{{ previousPost.url }}">{{ previousPost.data.title }}</a>
+        <a class="nav__item nav__item--prev" href="{{ previousPost.url }}">
+            <span class="nav__label"><span aria-hidden="true">&larr;</span> Previous</span>
+            <span class="nav__title">{{ previousPost.data.title }}</span>
+        </a>
     {% endif %}
     {% if nextPost %}
-        <a class="nav__item nav__item--next" href="{{ nextPost.url }}">{{ nextPost.data.title }}</a>
+        <a class="nav__item nav__item--next" href="{{ nextPost.url }}">
+            <span class="nav__label">Next <span aria-hidden="true">&rarr;</span></span>
+            <span class="nav__title">{{ nextPost.data.title }}</span>
+        </a>
     {% endif %}
 </div>

@@ -1,5 +1,6 @@
 ---
 title: HTML Landmarks for accessibility
+description: Using HTML5 landmark elements and ARIA roles to create navigable page regions for screen reader users.
 topics: HTML
 ---
 
@@ -149,13 +150,17 @@ It helps the physical impairment users who are using a screen reader and allows 
 
 ### Primary Landmark Roles :
 
-| Elements    | Roles                  |
-| ----------- | ---------------------- |
-| `<header>`  | `role="banner"`        |
-| `<nav>`     | `role="navigation"`    |
-| `<aside>`   | `role="contentinfo"`   |
-| `<sidebar>` | `role="complementary"` |
-| `<footer>`  | `role="footer"`        |
+| Elements   | Implicit ARIA Role       |
+| ---------- | ------------------------ |
+| `<header>` | `role="banner"`          |
+| `<nav>`    | `role="navigation"`      |
+| `<main>`   | `role="main"`            |
+| `<aside>`  | `role="complementary"`   |
+| `<footer>` | `role="contentinfo"`     |
+| `<section>`| `role="region"` (when labeled) |
+| `<form>`   | `role="form"` (when labeled)   |
+
+> **Note :** `<header>` maps to `banner` and `<footer>` maps to `contentinfo` only when they are **direct children** of `<body>`. When nested inside `<article>`, `<section>`, or other sectioning elements, they do not carry those implicit roles.
 
 <br>
 
@@ -190,3 +195,93 @@ Now let's fix the issue showing in the axeDevtools - `Document should have one m
 -   [Using ARIA landmarks to identify regions of a page](https://www.w3.org/WAI/GL/wiki/Using_ARIA_landmarks_to_identify_regions_of_a_page)
 
 -   [HTML ARIA ](https://www.w3.org/TR/html-aria/#docconformance)
+
+<br>
+
+## Scenarios and Edge Cases
+
+### Multiple identical landmarks on a page
+
+When a page contains more than one instance of the same landmark (e.g., two `<nav>` elements), screen readers list them identically, making it impossible for users to distinguish between them.
+
+**Solution :** Use `aria-label` or `aria-labelledby` to give each landmark a unique name :
+
+```html
+<nav aria-label="Main navigation">
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+    </ul>
+</nav>
+
+<nav aria-label="Footer navigation">
+    <ul>
+        <li><a href="/privacy">Privacy</a></li>
+        <li><a href="/terms">Terms</a></li>
+    </ul>
+</nav>
+```
+
+### Landmarks in Single Page Applications (SPAs)
+
+-   In SPAs, the page does not fully reload on navigation. Screen readers may not announce the new content automatically.
+
+-   **Best practices :**
+
+    -   Move focus to the new page's `<h1>` or `<main>` element after a route change.
+
+    -   Use an `aria-live="polite"` region to announce the page title change.
+
+    -   Ensure the `<title>` element is updated on each route change.
+
+```javascript
+// After route change
+document.title = 'New Page Title - My App';
+const mainHeading = document.querySelector('h1');
+if (mainHeading) {
+    mainHeading.setAttribute('tabindex', '-1');
+    mainHeading.focus();
+}
+```
+
+### Hidden and off-canvas landmarks
+
+-   Off-canvas navigation (hamburger menus) must use `aria-hidden="true"` when closed so screen readers skip them.
+
+-   When the menu opens, remove `aria-hidden` and manage focus appropriately.
+
+-   Content behind an open modal or overlay should have `aria-hidden="true"` or `inert` applied to prevent screen reader access.
+
+```html
+<!-- Closed state -->
+<nav id="mobile-nav" aria-label="Mobile navigation" aria-hidden="true">
+    <!-- nav items -->
+</nav>
+
+<!-- Open state (via JavaScript) -->
+<nav id="mobile-nav" aria-label="Mobile navigation" aria-hidden="false">
+    <!-- nav items -->
+</nav>
+```
+
+### Nested landmarks
+
+-   Landmarks should not be unnecessarily nested. For example, placing a `<nav>` inside an `<aside>` inside a `<section>` creates a deeply nested structure that screen readers must enumerate verbosely.
+
+-   Keep the landmark tree as flat and meaningful as possible.
+
+### Using `<section>` as a landmark
+
+-   `<section>` only becomes a landmark when it has an accessible name via `aria-label` or `aria-labelledby`. Without a label, it is just a generic grouping element.
+
+```html
+<!-- This IS a landmark -->
+<section aria-labelledby="faq-heading">
+    <h2 id="faq-heading">Frequently Asked Questions</h2>
+</section>
+
+<!-- This is NOT a landmark -->
+<section>
+    <h2>Frequently Asked Questions</h2>
+</section>
+```

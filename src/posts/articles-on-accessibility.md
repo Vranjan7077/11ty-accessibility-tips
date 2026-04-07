@@ -1,5 +1,6 @@
 ---
 title: Good articles and resources on accessibility
+description: A curated collection of blogs, courses, tools, and newsletters from leading accessibility experts and organizations.
 topics: Blog
 ---
 

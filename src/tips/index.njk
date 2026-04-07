@@ -1,0 +1,25 @@
+---
+title: All Accessibility Tips
+description: Browse every accessibility tip, pattern, and testing guide published on Accessibility Tips.
+layout: layouts/base-home.njk
+eleventyNavigation:
+  key: Tips
+  title: Tips
+  order: 2
+---
+
+<section class="page-intro">
+    <p class="page-intro__eyebrow">Browse</p>
+    <h1 class="page-intro__title">{{ title }}</h1>
+    <p class="page-intro__description">{{ description }}</p>
+</section>
+
+{% for post in collections.sortedByTitle %}
+    <article class="card__item">
+        <a class="card__link" href="{{ post.url }}">{{ post.data.title }}</a>
+        {% if post.data.description %}
+            <p class="card__description">{{ post.data.description }}</p>
+        {% endif %}
+        <div class="card__topics tag-post">{{ post.data.topics }}</div>
+    </article>
+{% endfor %}
