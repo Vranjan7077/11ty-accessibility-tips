@@ -16,13 +16,7 @@ body {
 }
 
 a {
-    color: $color-accent;
-    text-decoration: none;
-    transition: color $transition-fast;
-
-    &:hover {
-        color: #9ecbfb;
-    }
+    @include interactive-link($color-accent, #9ecbfb);
 }
 
 ::selection {

@@ -1,9 +1,7 @@
 @use '../abstracts/' as *;
 
-.card__item {
-    background-color: $color-surface;
-    border: 1px solid $color-border;
-    border-radius: 0.75rem;
+.card {
+    @include panel(0.75rem, $color-border, $color-surface);
     margin: $space-sm 0;
     padding: $space-lg;
     position: relative;
@@ -16,10 +14,7 @@
                 box-shadow $transition-base;
 
     &:hover {
-        background-color: $color-surface-hover;
-        border-color: $color-border-hover;
-        transform: translateY(-2px);
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        @include interactive-panel(-2px, $color-surface-hover, $color-border-hover, 0 8px 24px rgba(0, 0, 0, 0.2));
 
         .card__link {
             color: $color-primary;
@@ -31,60 +26,58 @@
     }
 
     &:has(.card__link:focus-visible) {
+        background-color: $color-surface-hover;
         border-color: $color-primary;
         box-shadow: 0 0 0 2px $color-primary;
-        background-color: $color-surface-hover;
 
         .card__link {
             color: $color-primary;
         }
     }
-}
 
-.card__link {
-    font-size: 1.1rem;
-    font-weight: $font-weight-bold;
-    line-height: 1.3;
-    text-align: left;
-    text-decoration: none;
-    color: $color-100;
-    margin-bottom: $space-xs;
-    transition: color $transition-fast;
+    &__link {
+        font-size: 1.1rem;
+        font-weight: $font-weight-bold;
+        line-height: 1.3;
+        text-align: left;
+        color: $color-100;
+        margin-bottom: $space-xs;
+        transition: color $transition-fast;
 
-    &::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        border-radius: 0.75rem;
+        &::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+        }
+
+        &:focus-visible {
+            outline: none;
+        }
+
+        &:hover {
+            text-decoration: none;
+        }
+
+        @include respond-down(compact) {
+            font-size: 1rem;
+        }
     }
 
-    &:focus-visible {
-        outline: none;
+    &__description {
+        @include tertiary-text(0.9rem);
+        line-height: 1.5;
+        margin-bottom: $space-sm;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
     }
 
-    &:hover {
-        text-decoration: none;
+    &__topics {
+        font-size: 0.8rem;
+        font-style: normal;
+        margin-top: $space-xs;
     }
-
-    @media only screen and (max-width: 30rem) {
-        font-size: 1rem;
-    }
-}
-
-.card__description {
-    font-size: 0.9rem;
-    color: $color-300;
-    line-height: 1.5;
-    margin-bottom: $space-sm;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-.card__topics {
-    font-size: 0.8rem;
-    font-style: normal;
-    margin-top: $space-xs;
 }

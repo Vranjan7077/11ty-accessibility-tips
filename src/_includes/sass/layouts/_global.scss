@@ -16,7 +16,7 @@ table {
         background-clip: padding-box;
         font-size: 0.95rem;
 
-        @media screen and (max-width: 767.98px) {
+        @include respond-down(mobile-table) {
             font-size: 0.9rem;
             min-width: auto;
         }
@@ -37,12 +37,12 @@ table {
 .post__content {
 
     blockquote {
+        @include secondary-text();
         background-color: rgba(129, 140, 248, 0.06);
         border-left: 3px solid $color-primary;
         border-radius: 0 0.5rem 0.5rem 0;
         padding: $space-md $space-lg;
         margin: $space-lg 0;
-        color: $color-200;
 
         strong {
             color: $color-primary;
@@ -75,16 +75,11 @@ table {
     }
 
     .heading-anchor {
-        color: $color-300;
-        text-decoration: none;
+        @include interactive-link($color-300, $color-primary);
         margin-left: $space-xs;
         opacity: 0;
-        transition: opacity $transition-fast;
+        transition: opacity $transition-fast, color $transition-fast;
         font-weight: $font-weight-regular;
-
-        &:hover {
-            color: $color-primary;
-        }
     }
 
     h2:hover .heading-anchor,
@@ -117,13 +112,7 @@ table {
 
     ul {
         list-style-type: disc;
-        margin-left: $space-lg !important;
-        margin-top: $space-lg !important;
-
-        li {
-            margin-bottom: $space-sm;
-            color: $color-200;
-        }
+        @include rich-text-list();
 
         li strong {
             color: $color-100;
@@ -131,28 +120,15 @@ table {
     }
 
     ol {
-        margin-left: $space-lg !important;
-        margin-top: $space-lg !important;
-
-        li {
-            margin-bottom: $space-sm;
-            color: $color-200;
-        }
+        @include rich-text-list();
     }
 
     p {
-        color: $color-200;
+        @include secondary-text();
     }
 
     a {
-        color: $color-accent;
-        text-decoration: underline;
-        text-underline-offset: 0.2em;
-        transition: color $transition-fast;
-
-        &:hover {
-            color: $color-primary;
-        }
+        @include interactive-link($color-accent, $color-primary, underline, 0.2em);
     }
 
     strong {

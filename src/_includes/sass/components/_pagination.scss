@@ -34,8 +34,7 @@
     }
 
     &--next {
-        background-color: $color-surface;
-        border: 1px solid $color-border;
+        @include panel(0.5rem, $color-border, $color-surface);
 
         &:hover:not(.pagination__link--disabled) {
             background-color: $color-surface-hover;
@@ -71,7 +70,7 @@
     }
 }
 
-@media only screen and (max-width: 30rem) {
+@include respond-down(compact) {
     .pagination__inner {
         flex-direction: column;
         gap: $space-md;

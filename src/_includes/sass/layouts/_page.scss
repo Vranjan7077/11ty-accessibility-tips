@@ -2,7 +2,7 @@
 
 :root {
     --container-width: auto;
-    @media screen and (min-width: 1024px) {
+    @include respond-up(content-desktop) {
         --container-width: 48rem;
         --post__heading-font-size: 2.5rem;
         --post__content-heading-line-height: 1.5;
@@ -42,13 +42,8 @@
     }
 
     &__link {
-        color: $color-200;
+        @include interactive-link($color-200, $color-100);
         font-size: 0.9rem;
-        text-decoration: none;
-
-        &:hover {
-            color: $color-100;
-        }
 
         &--current,
         &[aria-current='page'] {
@@ -75,15 +70,13 @@
         -webkit-text-fill-color: transparent;
         background-clip: text;
 
-        @media only screen and (max-width: 30rem) {
+        @include respond-down(compact) {
             font-size: 2rem;
         }
     }
 
     &__description {
-        color: $color-200;
-        font-size: 1.05rem;
-        line-height: 1.6;
+        @include secondary-text(1.05rem, 1.6);
         max-width: 36rem;
         margin: 0 auto;
     }
@@ -109,7 +102,7 @@
     }
 
     &__description {
-        color: $color-200;
+        @include secondary-text();
         max-width: 42rem;
     }
 }
@@ -127,7 +120,7 @@
         text-align: center;
         margin-bottom: $space-sm;
 
-        @media only screen and (max-width: 30rem) {
+        @include respond-down(compact) {
             font-size: 2rem;
         }
     }
@@ -155,9 +148,7 @@
     }
 
     &__cta-text {
-        color: $color-200;
-        font-size: 1.05rem;
-        line-height: 1.6;
+        @include secondary-text(1.05rem, 1.6);
         margin: 0 0 $space-sm 0;
     }
 
@@ -197,13 +188,7 @@ footer {
 
     span {
         a {
-            text-decoration: none;
-            color: $color-200;
-            transition: color $transition-fast;
-
-            &:hover {
-                color: $color-primary;
-            }
+            @include interactive-link($color-200, $color-primary);
         }
     }
 }

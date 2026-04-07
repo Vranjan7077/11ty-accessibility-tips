@@ -1,11 +1,11 @@
 {
-    "name": "accessibility-tips",
+    "name": "11ty-accessibility-tips",
     "version": "2.0.0",
     "private": true,
     "description": "Best practices, tips, and code examples for building inclusive, accessible web applications — covering WCAG, ARIA, HTML semantics, and assistive technology testing.",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/Vranjan7077/accessibility-tips.git"
+        "url": "git+https://github.com/Vranjan7077/11ty-accessibility-tips.git"
     },
     "keywords": [
         "accessibility",
@@ -26,7 +26,7 @@
     },
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/Vranjan7077/accessibility-tips/issues"
+        "url": "https://github.com/Vranjan7077/11ty-accessibility-tips/issues"
     },
     "homepage": "https://accessibilitytips.netlify.app",
     "scripts": {

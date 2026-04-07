@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 $phones: min-width 576px;
 $tablet: min-width 768px;
 $desktops: min-width 1025px;
@@ -10,3 +12,25 @@ $small-screen: max-width 575.98px;
 $xs-400: max-width 400.98px;
 $xs-370: max-width 374.98px;
 $xs-320: max-width 320.98px;
+
+$breakpoint-up: (
+    content-desktop: 1024px,
+);
+
+$breakpoint-down: (
+    compact: 30rem,
+    nav-stack: 35em,
+    mobile-table: 767.98px,
+);
+
+@mixin respond-up($name) {
+    @media screen and (min-width: map.get($breakpoint-up, $name)) {
+        @content;
+    }
+}
+
+@mixin respond-down($name) {
+    @media screen and (max-width: map.get($breakpoint-down, $name)) {
+        @content;
+    }
+}

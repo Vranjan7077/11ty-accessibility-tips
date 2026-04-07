@@ -1,7 +1,80 @@
+@use 'variables' as *;
+
 @mixin ellipsis() {
     white-space: nowrap;
     overflow: hidden;
     -ms-text-overflow: ellipsis;
     -o-text-overflow: ellipsis;
     text-overflow: ellipsis;
+}
+
+@mixin panel($radius: 0.75rem, $border-color: null, $background-color: null) {
+    border-radius: $radius;
+
+    @if $border-color != null {
+        border: 1px solid $border-color;
+    }
+
+    @if $background-color != null {
+        background-color: $background-color;
+    }
+}
+
+@mixin interactive-panel($translate-y, $background-color, $border-color, $shadow: null) {
+    background-color: $background-color;
+    border-color: $border-color;
+    transform: translateY($translate-y);
+
+    @if $shadow != null {
+        box-shadow: $shadow;
+    }
+}
+
+@mixin rich-text-list() {
+    margin-left: $space-lg !important;
+    margin-top: $space-lg !important;
+
+    li {
+        margin-bottom: $space-sm;
+        color: $color-200;
+    }
+}
+
+@mixin interactive-link(
+    $color: $color-accent,
+    $hover-color: $color-primary,
+    $text-decoration: none,
+    $underline-offset: null
+) {
+    color: $color;
+    text-decoration: $text-decoration;
+    transition: color $transition-fast;
+
+    @if $underline-offset != null {
+        text-underline-offset: $underline-offset;
+    }
+
+    &:hover {
+        color: $hover-color;
+    }
+}
+
+@mixin secondary-text($font-size: null, $line-height: null) {
+    color: $color-200;
+
+    @if $font-size != null {
+        font-size: $font-size;
+    }
+
+    @if $line-height != null {
+        line-height: $line-height;
+    }
+}
+
+@mixin tertiary-text($font-size: null) {
+    color: $color-300;
+
+    @if $font-size != null {
+        font-size: $font-size;
+    }
 }

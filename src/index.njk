@@ -20,13 +20,8 @@ pagination:
 {% endif %}
 
 {%- for post in paginatedPosts -%}
-    <article class="card__item">
-        <a class="card__link" href="{{ post.url }}">{{ post.data.title }}</a>
-        {% if post.data.description %}
-            <p class="card__description">{{ post.data.description }}</p>
-        {% endif %}
-        <div class="card__topics tag-post">{{ post.data.topics }}</div>
-    </article>
+    {% set showDescription = true %}
+    {% include 'layouts/components/postCard.njk' %}
 {%- endfor -%}
 
 {% set totalItems = collections.sortedByTitle.length %}
