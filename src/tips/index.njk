@@ -2,10 +2,13 @@
 title: All Accessibility Tips
 description: Browse every accessibility tip, pattern, and testing guide published on Accessibility Tips.
 layout: layouts/base-home.njk
-eleventyNavigation:
-  key: Tips
-  title: Tips
-  order: 2
+pagination:
+  data: collections.sortedByTitle
+  size: 6
+  alias: paginatedPosts
+  addAllPagesToCollections: true
+eleventyComputed:
+  title: "{% if pagination.pageNumber > 0 %}All Accessibility Tips - Page {{ pagination.pageNumber + 1 }}{% else %}All Accessibility Tips{% endif %}"
 ---
 
 <section class="page-intro">
@@ -14,7 +17,16 @@ eleventyNavigation:
     <p class="page-intro__description">{{ description }}</p>
 </section>
 
-{% for post in collections.sortedByTitle %}
+{% for post in paginatedPosts %}
     {% set showDescription = true %}
     {% include 'layouts/components/postCard.njk' %}
 {% endfor %}
+
+{% if pagination.pages.length > 1 %}
+    {% set totalItems = collections.sortedByTitle.length %}
+    {% set startItem = (pagination.pageNumber * pagination.size) + 1 %}
+    {% set endItem = startItem + paginatedPosts.length - 1 %}
+    {% set prevUrl = pagination.href.previous %}
+    {% set nextUrl = pagination.href.next %}
+    {% include 'layouts/components/pagination.njk' %}
+{% endif %}

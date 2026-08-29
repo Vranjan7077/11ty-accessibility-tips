@@ -1,0 +1,31 @@
+<button type="button" class="search-trigger" id="search-trigger" hidden>
+    <svg class="search-trigger__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M20 20l-4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+    <span class="search-trigger__label">Search</span>
+    <span class="search-trigger__keys"><kbd>Ctrl</kbd><kbd>K</kbd></span>
+</button>
+
+<dialog id="search-dialog" class="search-dialog" aria-labelledby="search-dialog-title">
+    <div class="search-dialog__inner">
+        <h2 id="search-dialog-title" class="visually-hidden">Search accessibility tips</h2>
+        <form class="search-dialog__form" role="search">
+            <svg class="search-dialog__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/>
+                <path d="M20 20l-4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <label for="search-input" class="visually-hidden">Search accessibility tips</label>
+            <input type="search" id="search-input" class="search-dialog__input" placeholder="Search tips, topics, WCAG criteria..." autocomplete="off">
+            <button type="button" class="search-dialog__close" id="search-close" aria-label="Close search">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+        </form>
+        <p id="search-status" class="search-dialog__status" aria-live="polite"></p>
+        <ul class="search-dialog__results" id="search-results"></ul>
+    </div>
+</dialog>
+
+<script src="{{ '/assets/js/search.js' | url }}" defer></script>

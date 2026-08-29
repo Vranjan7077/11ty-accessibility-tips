@@ -1,12 +1,31 @@
 ---
 title: HTML Landmarks for accessibility
+
 description: Using HTML5 landmark elements and ARIA roles to create navigable page regions for screen reader users.
-topics: HTML
+
+type: guide
+topics:
+    - HTML
+    - ARIA
+technologies:
+    - HTML
+level: beginner
+wcag:
+    - 1.3.1
+    - 2.4.1
+
+keywords:
+    - html landmarks
+    - landmark accessibility
+    - semantic landmarks
+    - aria landmarks
+    - screen reader navigation
+    - web accessibility
 ---
 
-## Why we need accessibility Landmarks ?
+## Why we need landmarks
 
-It helps the physical impairment users who are using a screen reader and allows them to jump to a particular section of a webpage.
+Without landmarks, a screen reader user has one way to get through a page: listen to it top to bottom. Landmarks give them a shortcut - press a key and jump straight to the navigation, the main content, or the footer, the same way a sighted user's eye jumps straight to the header when they land on a page. That's the whole point of `<header>`, `<nav>`, `<main>`, `<aside>`, and `<footer>`: each one marks out a region a screen reader can announce and let the user skip to directly, and [avoiding skipped heading levels](/topics/accessibility/avoid-skipping-heading-levels/) does something similar one level down, for jumping between sections within the content itself.
 
 ### Primary Landmark Elements
 
@@ -148,7 +167,7 @@ It helps the physical impairment users who are using a screen reader and allows 
 </html>
 ```
 
-### Primary Landmark Roles :
+### Primary Landmark Roles:
 
 | Elements   | Implicit ARIA Role       |
 | ---------- | ------------------------ |
@@ -160,11 +179,11 @@ It helps the physical impairment users who are using a screen reader and allows 
 | `<section>`| `role="region"` (when labeled) |
 | `<form>`   | `role="form"` (when labeled)   |
 
-> **Note :** `<header>` maps to `banner` and `<footer>` maps to `contentinfo` only when they are **direct children** of `<body>`. When nested inside `<article>`, `<section>`, or other sectioning elements, they do not carry those implicit roles.
+> **Note:** `<header>` maps to `banner` and `<footer>` maps to `contentinfo` only when they are **direct children** of `<body>`. When nested inside `<article>`, `<section>`, or other sectioning elements, they do not carry those implicit roles.
 
-<br>
+For a broader look at when to reach for these elements versus a plain `<div>`, see [semantic HTML vs div soup](/topics/html/semantic-html-vs-div-soup/).
 
-# Understanding it with the example :
+## Understanding it with the example
 
 As showing in the image below is the example of current page without using a landmark
 
@@ -174,37 +193,13 @@ Now let's fix the issue showing in the axeDevtools - `Document should have one m
 
 ![Fixed missing landmark](/assets/img/html-landmarks-missing-fixed.jpg)
 
-<br>
-
-### Resources :
-
--   [Landmarks](https://a11y-101.com/development/landmarks)
-
--   [Using ARIA landmarks to identify regions of a page](https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA11.html)
-
--   [Page must have one main landmark](https://dequeuniversity.com/rules/axe/4.4/landmark-one-main)
-
--   [Why headings and landmarks are so important?](https://www.youtube.com/watch?v=vAAzdi1xuUY)
-
--   [Extension - landmark navgation](https://chrome.google.com/webstore/detail/landmark-navigation-via-k/ddpokpbjopmeeiiolheejjpkonlkklgp)
-
--   [Semantics - MDN](https://developer.mozilla.org/en-US/docs/Glossary/Semantics)
-
--   [Deque University ](https://dequeuniversity.com/assets/html/jquery-summit/html5/slides/landmarks.html)
-
--   [Using ARIA landmarks to identify regions of a page](https://www.w3.org/WAI/GL/wiki/Using_ARIA_landmarks_to_identify_regions_of_a_page)
-
--   [HTML ARIA ](https://www.w3.org/TR/html-aria/#docconformance)
-
-<br>
-
 ## Scenarios and Edge Cases
 
 ### Multiple identical landmarks on a page
 
 When a page contains more than one instance of the same landmark (e.g., two `<nav>` elements), screen readers list them identically, making it impossible for users to distinguish between them.
 
-**Solution :** Use `aria-label` or `aria-labelledby` to give each landmark a unique name :
+**Solution:** Use `aria-label` or `aria-labelledby` to give each landmark a unique name:
 
 ```html
 <nav aria-label="Main navigation">
@@ -226,13 +221,13 @@ When a page contains more than one instance of the same landmark (e.g., two `<na
 
 -   In SPAs, the page does not fully reload on navigation. Screen readers may not announce the new content automatically.
 
--   **Best practices :**
+-   **Best practices:**
 
-    -   Move focus to the new page's `<h1>` or `<main>` element after a route change.
+   -  Move focus to the new page's `<h1>` or `<main>` element after a route change.
 
-    -   Use an `aria-live="polite"` region to announce the page title change.
+   -  Use an `aria-live="polite"` region to announce the page title change.
 
-    -   Ensure the `<title>` element is updated on each route change.
+   -  Ensure the `<title>` element is updated on each route change.
 
 ```javascript
 // After route change
@@ -245,6 +240,8 @@ if (mainHeading) {
 ```
 
 ### Hidden and off-canvas landmarks
+
+For skip links, mega menus, and hamburger-menu patterns in full detail, see [accessible navigation and skip links](/topics/html/accessible-navigation-and-skip-links/) - the landmark rules below cover the piece specific to visibility state.
 
 -   Off-canvas navigation (hamburger menus) must use `aria-hidden="true"` when closed so screen readers skip them.
 
@@ -285,3 +282,13 @@ if (mainHeading) {
     <h2>Frequently Asked Questions</h2>
 </section>
 ```
+
+## Resources
+
+- [Landmarks](https://a11y-101.com/development/landmarks)
+- [Using ARIA landmarks to identify regions of a page](https://www.w3.org/WAI/WCAG21/Techniques/aria/ARIA11.html)
+- [Page must have one main landmark](https://dequeuniversity.com/rules/axe/4.4/landmark-one-main)
+- [Why headings and landmarks are so important?](https://www.youtube.com/watch?v=vAAzdi1xuUY)
+- [Extension - Landmark Navigation via Keyboard](https://chrome.google.com/webstore/detail/landmark-navigation-via-k/ddpokpbjopmeeiiolheejjpkonlkklgp)
+- [Semantics - MDN](https://developer.mozilla.org/en-US/docs/Glossary/Semantics)
+- [HTML ARIA](https://www.w3.org/TR/html-aria/#docconformance)

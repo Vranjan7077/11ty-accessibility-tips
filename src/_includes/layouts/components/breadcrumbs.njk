@@ -29,4 +29,21 @@
             {% endfor %}
         </ol>
     </nav>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {% if showHomeLink %}
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ metadata.url }}{{ homeUrl }}" },
+            {% endif %}
+            {% for item in breadcrumbEntries %}
+            {% set breadcrumbTitle = item.title %}
+            {% if item.key == 'Tips' %}{% set breadcrumbTitle = 'Tips' %}{% endif %}
+            { "@type": "ListItem", "position": {{ loop.index0 + (2 if showHomeLink else 1) }}, "name": "{{ breadcrumbTitle }}", "item": "{{ metadata.url }}{{ item.url | url }}" }{% if not loop.last %},{% endif %}
+            {% endfor %}
+        ]
+    }
+    </script>
 {% endif %}

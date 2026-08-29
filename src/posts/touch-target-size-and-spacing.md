@@ -1,27 +1,36 @@
 ---
 title: Touch target size and spacing
 description: WCAG requirements for minimum touch target sizes, spacing between interactive elements, and CSS techniques for improving mobile usability.
+
 topics: CSS
+
+keywords:
+    - touch target size
+    - target spacing accessibility
+    - mobile accessibility
+    - wcag touch targets
+    - tap target size
+    - web accessibility
 ---
 
-Small touch targets are one of the most common mobile accessibility failures. Users with motor impairments, tremors, or limited dexterity struggle to tap small buttons and links accurately.
+Tap a button that's 20 pixels tall with a fingertip that covers 40, and you'll miss it as often as not - and that's without factoring in a tremor or limited dexterity. Small touch targets are one of the most common, and most fixable, mobile accessibility failures.
 
 ## WCAG requirements
 
-WCAG provides two levels of target size conformance :
+WCAG provides two levels of target size conformance:
 
 | Level | Criterion | Minimum size |
 |-------|-----------|--------------|
-| AA | 2.5.8 Target Size (Minimum) | 24×24 CSS pixels |
-| AAA | 2.5.5 Target Size (Enhanced) | 44×44 CSS pixels |
+| AA | 2.5.8 Target Size (Minimum) | 24x24 CSS pixels |
+| AAA | 2.5.5 Target Size (Enhanced) | 44x44 CSS pixels |
 
-> **Recommendation :** Aim for **44×44px** minimum. This is also Apple's Human Interface Guidelines recommendation and Google's Material Design default.
+> **Recommendation:** Aim for **44x44px** minimum. This is also Apple's Human Interface Guidelines recommendation and Google's Material Design default.
 
 ## CSS techniques for larger targets
 
 ### Padding instead of dimensions
 
-Don't set explicit width/height — use padding to grow the target naturally :
+Don't set explicit width/height - use padding to grow the target naturally:
 
 ```css
 .btn {
@@ -36,7 +45,7 @@ Don't set explicit width/height — use padding to grow the target naturally :
 
 ### Expanding link targets with pseudo-elements
 
-Make a small text link easier to tap without changing its visual size :
+Make a small text link easier to tap without changing its visual size:
 
 ```css
 .nav-link {
@@ -54,7 +63,7 @@ This adds 8px of invisible clickable area around the link.
 
 ### Icon buttons
 
-Icon-only buttons need explicit sizing :
+Icon-only buttons need explicit sizing:
 
 ```css
 .icon-btn {
@@ -78,7 +87,7 @@ The icon is 20px but the tap target is 44px.
 
 ## Spacing between targets
 
-Adjacent targets that are too close cause accidental taps. WCAG 2.5.8 allows targets smaller than 24px only if they have enough spacing :
+Adjacent targets that are too close cause accidental taps. WCAG 2.5.8 allows targets smaller than 24px only if they have enough spacing:
 
 ```css
 .action-bar {
@@ -94,7 +103,7 @@ Adjacent targets that are too close cause accidental taps. WCAG 2.5.8 allows tar
 
 ### Inline links in text
 
-Links within paragraphs are exempt from the 24px minimum, but you can help by increasing line height :
+Links within paragraphs are exempt from the 24px minimum, but you can help by increasing line height:
 
 ```css
 .content {
@@ -127,7 +136,7 @@ Links within paragraphs are exempt from the 24px minimum, but you can help by in
 
 ### Form elements
 
-Default checkbox and radio inputs are tiny. Increase their target using the label :
+Default checkbox and radio inputs are tiny. Increase their target using the label - the implicit-labeling pattern below is covered in more depth in [accessible forms and labels](/topics/html/accessible-forms-and-labels/):
 
 ```html
 <label class="checkbox-label">
@@ -155,7 +164,7 @@ Default checkbox and radio inputs are tiny. Increase their target using the labe
 
 ### Close buttons
 
-Close buttons on modals, alerts, and toasts are frequently too small :
+Close buttons on modals, alerts, and toasts are frequently too small:
 
 ```css
 .close-btn {
@@ -176,13 +185,13 @@ Close buttons on modals, alerts, and toasts are frequently too small :
 
 ## Testing target sizes
 
-Use your browser's DevTools to verify target sizes :
+Use your browser's DevTools to verify target sizes:
 
-1. Right-click an element → Inspect
+1. Right-click an element -> Inspect
 2. Check the element's box model (content + padding)
-3. Ensure the total clickable area is at least 44×44px
+3. Ensure the total clickable area is at least 44x44px
 
-You can also use the CSS outline trick to visualize all clickable areas :
+You can also use the CSS outline trick to visualize all clickable areas - see [CSS techniques for accessibility testing](/topics/css/css-techniques-for-accessibility-testing/) for more debug-only tricks like this one:
 
 ```css
 a, button, input, select, textarea, [role="button"] {
@@ -194,4 +203,4 @@ a, button, input, select, textarea, [role="button"] {
 
 - [WCAG 2.5.8 Target Size (Minimum)](https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html)
 - [WCAG 2.5.5 Target Size (Enhanced)](https://www.w3.org/WAI/WCAG22/Understanding/target-size-enhanced.html)
-- [Apple HIG — Pointing and clicking](https://developer.apple.com/design/human-interface-guidelines/accessibility)
+- [Apple HIG - Pointing and clicking](https://developer.apple.com/design/human-interface-guidelines/accessibility)

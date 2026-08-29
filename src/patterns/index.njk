@@ -1,0 +1,27 @@
+---
+title: Pattern library
+description: Accessible implementations of common interactive widgets - keyboard behavior, focus handling, ARIA, and how to test each one.
+layout: layouts/base-home.njk
+---
+
+<section class="page-intro">
+    <p class="page-intro__eyebrow">Patterns</p>
+    <h1 class="page-intro__title">{{ title }}</h1>
+    <p class="page-intro__description">{{ description }}</p>
+</section>
+
+{%- set patterns = [] -%}
+{%- for post in collections.post -%}
+    {%- if post.data.type == 'pattern' -%}
+        {%- set noop = patterns.push(post) -%}
+    {%- endif -%}
+{%- endfor -%}
+
+{% if patterns.length %}
+    {% for post in patterns %}
+        {% set showDescription = true %}
+        {% include 'layouts/components/postCard.njk' %}
+    {% endfor %}
+{% else %}
+    <p class="empty-state">No patterns published yet - check back soon.</p>
+{% endif %}

@@ -1,0 +1,55 @@
+@use '../abstracts/' as *;
+
+.wcag-group {
+    margin: $space-2xl 0;
+
+    &__heading {
+        font-size: 1.1rem;
+        font-weight: $font-weight-bold;
+        color: $color-primary;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: $space-md;
+        padding-bottom: $space-sm;
+        border-bottom: 1px solid $color-border;
+    }
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        gap: $space-md;
+    }
+}
+
+.wcag-criterion {
+    @include panel(0.75rem, $color-border, $color-surface);
+    padding: $space-md $space-lg;
+
+    &__heading {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: $space-sm;
+        font-size: 1rem;
+        font-weight: $font-weight-medium;
+        color: $color-100;
+        margin-bottom: $space-sm;
+    }
+
+    &__level {
+        @include tertiary-text(0.75rem);
+        font-weight: $font-weight-normal;
+    }
+
+    &__posts {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: $space-xs;
+
+        a {
+            @include interactive-link($color-accent, $color-primary);
+            font-size: 0.9rem;
+        }
+    }
+}

@@ -1,10 +1,19 @@
 ---
 title: Screen reader testing guide
 description: A practical guide to testing with NVDA, VoiceOver, and TalkBack including essential keyboard shortcuts and common testing patterns.
+
 topics: Accessibility
+
+keywords:
+    - screen reader testing
+    - nvda testing
+    - voiceover testing
+    - talkback testing
+    - screen reader accessibility checklist
+    - web accessibility
 ---
 
-Automated testing tools catch roughly 30–40% of accessibility issues. The rest require manual testing with actual screen readers. This guide covers the three most common screen readers and how to use them for testing.
+Automated testing tools catch roughly 30-40% of accessibility issues. The rest require manual testing with actual screen readers. This guide covers the four most common screen readers and how to use them for testing.
 
 ## Which screen reader to test with
 
@@ -15,7 +24,7 @@ Automated testing tools catch roughly 30–40% of accessibility issues. The rest
 | VoiceOver | macOS / iOS | Safari | ~20% |
 | TalkBack | Android | Chrome | ~10% |
 
-> **Minimum :** Test with NVDA + Firefox on Windows and VoiceOver + Safari on macOS. These two cover the majority of screen reader users.
+> **Minimum:** Test with NVDA + Firefox on Windows and VoiceOver + Safari on macOS. These two cover the majority of screen reader users.
 
 ## NVDA (Windows)
 
@@ -36,14 +45,14 @@ Download NVDA for free from [nvaccess.org](https://www.nvaccess.org/download/).
 | K | Next link |
 | F | Next form field |
 | T | Next table |
-| 1–6 | Next heading at that level |
+| 1-6 | Next heading at that level |
 | Tab | Next focusable element |
 | Enter | Activate link/button |
 | Insert + F7 | Elements list (headings, links, landmarks) |
 
 ### The Elements List
 
-Press `Insert + F7` to open the Elements List — this is the most useful testing tool. It shows :
+Press `Insert + F7` to open the Elements List - this is the most useful testing tool. It shows:
 - All headings (check hierarchy)
 - All links (check descriptive text)
 - All landmarks (check page structure)
@@ -78,7 +87,7 @@ Press `VO + U` to open the Rotor. Use Left/Right arrows to switch between catego
 
 ### Enabling
 
-Settings → Accessibility → VoiceOver. Or triple-click the side button (if configured).
+Settings -> Accessibility -> VoiceOver. Or triple-click the side button (if configured).
 
 ### Essential gestures
 
@@ -96,7 +105,7 @@ Settings → Accessibility → VoiceOver. Or triple-click the side button (if co
 
 ### Enabling
 
-Settings → Accessibility → TalkBack. Or hold both volume keys for 3 seconds.
+Settings -> Accessibility -> TalkBack. Or hold both volume keys for 3 seconds.
 
 ### Essential gestures
 
@@ -119,19 +128,19 @@ Settings → Accessibility → TalkBack. Or hold both volume keys for 3 seconds.
 
 ### Heading structure
 
-1. Press H repeatedly — do headings form a logical outline?
-2. Are there any skipped levels (h1 → h3)?
+1. Press H repeatedly - do headings form a logical outline?
+2. Are there any skipped levels (h1 -> h3)?
 3. Does every section have a heading?
 
 ### Links
 
-1. Open the links list — do link texts make sense out of context?
+1. Open the links list - do link texts make sense out of context?
 2. Are there any "click here" or "read more" links?
 3. Do links that open in a new window indicate this?
 
 ### Forms
 
-1. Tab through all form fields — is each one announced with its label?
+1. Tab through all form fields - is each one announced with its label?
 2. Are required fields announced as required?
 3. When validation fails, is the error announced?
 4. Is the error associated with its field?
@@ -146,14 +155,14 @@ Settings → Accessibility → TalkBack. Or hold both volume keys for 3 seconds.
 
 ### NVDA Speech Viewer
 
-NVDA includes a Speech Viewer that displays everything it announces in a text window. Enable it from the NVDA menu → Tools → Speech viewer. This is invaluable for sighted developers testing screen reader output.
+NVDA includes a Speech Viewer that displays everything it announces in a text window. Enable it from the NVDA menu -> Tools -> Speech viewer. This is invaluable for sighted developers testing screen reader output.
 
 ### Browser DevTools Accessibility Panel
 
-All major browsers have an accessibility tree inspector :
-- Chrome: DevTools → Elements → Accessibility pane
-- Firefox: DevTools → Accessibility tab
-- Safari: Web Inspector → Audit tab
+All major browsers have an accessibility tree inspector:
+- Chrome: DevTools -> Elements -> Accessibility pane
+- Firefox: DevTools -> Accessibility tab
+- Safari: Web Inspector -> Audit tab
 
 ## Resources
 
@@ -161,3 +170,5 @@ All major browsers have an accessibility tree inspector :
 - [VoiceOver Getting Started Guide](https://support.apple.com/guide/voiceover)
 - [Deque: Screen Reader Testing](https://www.deque.com/blog/screen-reader-testing/)
 - [WebAIM Screen Reader Survey](https://webaim.org/projects/screenreadersurvey/)
+
+This guide is one piece of a larger testing process - see the [accessibility testing checklist](/topics/accessibility/accessibility-testing-checklist/) for the full manual pass, and [automated accessibility testing tools](/topics/accessibility/automated-tools-for-testing-the-accessibility/) for what to run before you even get to this stage.

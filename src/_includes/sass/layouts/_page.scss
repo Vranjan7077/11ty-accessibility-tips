@@ -80,6 +80,14 @@
         max-width: 36rem;
         margin: 0 auto;
     }
+
+    &__actions {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: $space-md;
+        margin-top: $space-xl;
+    }
 }
 
 .page-intro {
@@ -107,6 +115,14 @@
     }
 }
 
+.browse-all {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: $space-md;
+    margin: $space-2xl 0;
+}
+
 .post {
     margin: $space-xl 0;
     padding: $space-xl $space-md $space-md;
@@ -117,7 +133,6 @@
         font-size: var(--post__heading-font-size);
         font-weight: $font-weight-semibold;
         line-height: 1.2;
-        text-align: center;
         margin-bottom: $space-sm;
 
         @include respond-down(compact) {
@@ -125,9 +140,47 @@
         }
     }
 
+    &__description {
+        @include secondary-text(1.1rem, 1.6);
+        max-width: 42rem;
+        margin-bottom: $space-lg;
+    }
+
     &__meta {
-        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: $space-sm;
         margin-bottom: $space-xl;
+        padding-bottom: $space-lg;
+        border-bottom: 1px solid $color-border;
+
+        &-info,
+        &-topics,
+        &-tech,
+        &-wcag {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: $space-sm;
+            list-style: none;
+        }
+
+        &-info {
+            @include tertiary-text(0.85rem);
+        }
+
+        &-item {
+            &:not(:last-child)::after {
+                content: '\2022';
+                margin-left: $space-sm;
+                color: $color-border-hover;
+            }
+        }
+
+        &-item--level {
+            color: $color-tag-text;
+            font-weight: $font-weight-medium;
+        }
     }
 
     &__content {
@@ -176,6 +229,11 @@
     text-transform: uppercase;
     vertical-align: middle;
     transition: background-color $transition-fast;
+
+    &:hover,
+    &:focus-visible {
+        background-color: rgba(129, 140, 248, 0.2);
+    }
 }
 
 footer {

@@ -1,0 +1,37 @@
+---
+title: WCAG success criteria
+description: Browse accessibility tips and guides organized by the WCAG success criteria they help you meet, grouped by the four core principles.
+layout: layouts/base-home.njk
+eleventyNavigation:
+  key: WCAG
+  title: WCAG
+  order: 4
+---
+
+<section class="page-intro">
+    <p class="page-intro__eyebrow">Reference</p>
+    <h1 class="page-intro__title">{{ title }}</h1>
+    <p class="page-intro__description">{{ description }}</p>
+</section>
+
+{% for group in collections.wcagIndex %}
+<section class="wcag-group" aria-labelledby="wcag-{{ group.principle | slug }}">
+    <h2 id="wcag-{{ group.principle | slug }}" class="wcag-group__heading">{{ group.principle }}</h2>
+    <div class="wcag-group__list">
+        {% for criterion in group.criteria %}
+            <div class="wcag-criterion">
+                <h3 class="wcag-criterion__heading">
+                    <span class="badge badge--wcag">{{ criterion.code }}</span>
+                    {{ criterion.name }}
+                    {% if criterion.level %}<span class="wcag-criterion__level">{{ criterion.level }}</span>{% endif %}
+                </h3>
+                <ul class="wcag-criterion__posts">
+                    {% for post in criterion.posts %}
+                        <li><a href="{{ post.url }}">{{ post.data.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+{% endfor %}

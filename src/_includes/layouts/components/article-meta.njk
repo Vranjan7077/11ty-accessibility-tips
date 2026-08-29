@@ -1,0 +1,34 @@
+<div class="post__meta">
+    <ul class="post__meta-info">
+        <li class="post__meta-item">{% if type == 'pattern' %}<a href="{{ '/patterns/' | url }}">Pattern</a>{% elif type == 'resource' %}Resource{% elif type %}{{ type | capitalize }}{% else %}Tip{% endif %}</li>
+        {% if level %}<li class="post__meta-item post__meta-item--level">{{ level | capitalize }}</li>{% endif %}
+        <li class="post__meta-item">{{ page.date | readableDate }}</li>
+        {% if lastUpdated %}<li class="post__meta-item">Updated {{ lastUpdated | readableDate }}</li>{% endif %}
+        <li class="post__meta-item">{{ content | readingTime }} min read</li>
+    </ul>
+
+    {% if topicsList and topicsList.length %}
+        <ul class="post__meta-topics">
+            {% for topic in topicsList %}
+                <li><a class="tag-post" href="{{ ('/resources/' if type == 'resource' else '/topics/' + (topic | slug) + '/') | url }}">{{ topic }}</a></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if technologies and technologies.length %}
+        <ul class="post__meta-tech" aria-label="Technologies covered">
+            {% for tech in technologies %}
+                <li class="badge badge--tech">{{ tech }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if wcag and wcag.length %}
+        <ul class="post__meta-wcag" aria-label="Related WCAG success criteria">
+            {% for code in wcag %}
+                {% set criterion = wcagCriteria[code] %}
+                <li class="badge badge--wcag">WCAG {{ code }}{% if criterion %} &ndash; {{ criterion.name }} ({{ criterion.level }}){% endif %}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</div>

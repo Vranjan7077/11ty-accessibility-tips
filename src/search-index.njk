@@ -1,0 +1,18 @@
+---
+permalink: /search-index.json
+eleventyExcludeFromCollections: true
+---
+{%- set entries = [] -%}
+{%- for post in collections.post -%}
+    {%- set entry = {
+        title: post.data.title,
+        description: post.data.description,
+        url: post.url,
+        type: post.data.type,
+        topics: post.data.topicsList,
+        technologies: (post.data.technologies or []),
+        wcag: (post.data.wcag or [])
+    } -%}
+    {%- set noop = entries.push(entry) -%}
+{%- endfor -%}
+{{ entries | dump | safe }}

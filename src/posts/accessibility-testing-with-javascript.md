@@ -1,12 +1,27 @@
 ---
 title: Accessibility testing with JavaScript
 description: Using axe-core, Playwright, Jest, and Cypress to write automated accessibility tests in JavaScript that run in CI/CD pipelines.
-topics: Javascript
+
+type: guide
+topics:
+    - JavaScript
+    - Testing
+technologies:
+    - JavaScript
+level: intermediate
+
+keywords:
+    - accessibility testing with javascript
+    - axe-core
+    - playwright accessibility testing
+    - jest accessibility testing
+    - cypress accessibility
+    - automated accessibility testing
 ---
 
-Automated accessibility testing catches issues before they reach production. JavaScript libraries like axe-core integrate directly into your existing test suite — unit tests, integration tests, and end-to-end tests.
+Automated accessibility testing catches issues before they reach production - and unlike a manual pass with the [accessibility testing checklist](/topics/accessibility/accessibility-testing-checklist/), it runs on every commit without anyone having to remember to do it. JavaScript libraries like axe-core integrate directly into your existing test suite: unit tests, integration tests, and end-to-end tests.
 
-## axe-core — the foundation
+## axe-core - the foundation
 
 Most JavaScript accessibility testing tools are built on [axe-core](https://github.com/dequelabs/axe-core). It runs WCAG 2.1 checks against rendered DOM and returns structured violations.
 
@@ -46,7 +61,7 @@ axe.run(document.getElementById('login-form'), {
 
 ## Jest + jest-axe
 
-Add accessibility checks to your React, Vue, or Angular component tests :
+Add accessibility checks to your React, Vue, or Angular component tests:
 
 ```bash
 npm install --save-dev jest-axe
@@ -101,7 +116,7 @@ it('should remain accessible after form submission error', async () => {
 
 ## Playwright accessibility testing
 
-Playwright has built-in axe-core integration through `@axe-core/playwright` :
+Playwright has built-in axe-core integration through `@axe-core/playwright`:
 
 ```bash
 npm install --save-dev @axe-core/playwright
@@ -156,6 +171,8 @@ test('should navigate through cards with keyboard', async ({ page }) => {
 
 ### Testing focus management
 
+This test is checking the exact pattern described in [focus management in SPAs](/topics/javascript/focus-management-in-spas/) - it's worth reading that post first if the assertion below doesn't make sense at a glance.
+
 ```javascript
 test('focus should move to heading after navigation', async ({ page }) => {
     await page.goto('/');
@@ -209,15 +226,15 @@ cy.checkA11y(null, null, (violations) => {
     violations.forEach(violation => {
         cy.log(`[${violation.impact}] ${violation.id}: ${violation.description}`);
         violation.nodes.forEach(node => {
-            cy.log(`  → ${node.html}`);
+            cy.log(`  -> ${node.html}`);
         });
     });
 });
 ```
 
-## ESLint — catch issues at write time
+## ESLint - catch issues at write time
 
-Catch accessibility issues in JSX/TSX as you type :
+Catch accessibility issues in JSX/TSX as you type:
 
 ```bash
 npm install --save-dev eslint-plugin-jsx-a11y
@@ -240,7 +257,7 @@ This catches errors like missing `alt` attributes and invalid ARIA props before 
 
 ## CI/CD integration
 
-Add accessibility checks to your pipeline :
+Add accessibility checks to your pipeline:
 
 ```yaml
 name: Accessibility Tests
@@ -270,7 +287,7 @@ jobs:
 | Duplicate IDs | Logical tab order |
 | Empty links/buttons | Whether content updates are announced |
 
-> **Rule of thumb :** Automated tests cover ~40% of WCAG criteria. Always supplement with manual screen reader testing.
+> **Rule of thumb:** Automated tests cover ~40% of WCAG criteria. Always supplement with manual screen reader testing.
 
 ## Resources
 

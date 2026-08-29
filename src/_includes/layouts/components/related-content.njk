@@ -1,0 +1,13 @@
+{% set currentMeta = { topicsList: topicsList, technologies: technologies, type: type, url: page.url } %}
+{% set related = collections.post | relatedPosts(currentMeta, 3) %}
+{% if related.length %}
+<section class="related-content" aria-labelledby="related-content-heading">
+    <h2 id="related-content-heading" class="related-content__heading">Related content</h2>
+    <div class="related-content__grid">
+        {% for post in related %}
+            {% set showDescription = true %}
+            {% include 'layouts/components/postCard.njk' %}
+        {% endfor %}
+    </div>
+</section>
+{% endif %}

@@ -1,0 +1,136 @@
+@use '../abstracts/' as *;
+
+.home-section {
+    margin: $space-3xl 0;
+
+    &__heading {
+        font-size: 1.4rem;
+        font-weight: $font-weight-bold;
+        color: $color-100;
+        margin-bottom: $space-lg;
+    }
+}
+
+.topic-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: $space-md;
+}
+
+.topic-card {
+    @include panel(0.75rem, $color-border, $color-surface);
+    display: flex;
+    flex-direction: column;
+    gap: $space-xs;
+    padding: $space-lg;
+    text-decoration: none;
+    transition: transform $transition-base, background-color $transition-base, border-color $transition-base;
+
+    &:hover,
+    &:focus-visible {
+        @include interactive-panel(-2px, $color-surface-hover, $color-border-hover, 0 8px 24px $shadow-color);
+    }
+
+    &:focus-visible {
+        outline: 2px solid $color-primary;
+        outline-offset: 2px;
+    }
+
+    &__name {
+        font-size: 1.05rem;
+        font-weight: $font-weight-bold;
+        color: $color-100;
+    }
+
+    &__description {
+        @include tertiary-text(0.85rem);
+    }
+}
+
+.callout {
+    @include panel(0.75rem, $color-border, $color-surface);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: $space-md;
+    padding: $space-lg $space-xl;
+    border-left: 3px solid $color-primary;
+
+    p {
+        @include secondary-text(1rem, 1.6);
+        margin: 0;
+        flex: 1 1 20rem;
+    }
+}
+
+.popular-topics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-sm;
+    list-style: none;
+
+    &__link {
+        @include panel(1rem, $color-border, $color-surface);
+        display: inline-flex;
+        align-items: center;
+        gap: $space-xs;
+        padding: $space-xs $space-md;
+        font-size: 0.85rem;
+        color: $color-200;
+        text-decoration: none;
+        transition: background-color $transition-fast, border-color $transition-fast;
+
+        &:hover,
+        &:focus-visible {
+            background-color: $color-surface-hover;
+            border-color: $color-border-hover;
+            color: $color-100;
+        }
+    }
+
+    &__count {
+        @include tertiary-text(0.75rem);
+    }
+}
+
+.test-categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: $space-md;
+    margin-top: $space-xl;
+}
+
+.test-category {
+    @include panel(0.75rem, $color-border, $color-surface);
+    padding: $space-lg;
+
+    &__heading {
+        font-size: 1.05rem;
+        font-weight: $font-weight-bold;
+        color: $color-100;
+        margin-bottom: $space-sm;
+    }
+
+    &__description {
+        @include secondary-text(0.9rem, 1.5);
+        margin-bottom: $space-md;
+    }
+
+    &__links {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: $space-xs;
+
+        a {
+            @include interactive-link($color-accent, $color-primary);
+            font-size: 0.9rem;
+        }
+    }
+}
+
+.empty-state {
+    @include tertiary-text(0.95rem);
+    padding: $space-xl 0;
+}

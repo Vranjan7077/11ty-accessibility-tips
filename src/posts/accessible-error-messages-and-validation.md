@@ -1,14 +1,23 @@
 ---
 title: Accessible error messages and validation
 description: Implementing form validation that announces errors to screen readers using aria-live regions, aria-invalid, and proper error message association.
+
 topics: HTML
+
+keywords:
+    - accessible error messages
+    - form validation accessibility
+    - aria-invalid
+    - aria-live errors
+    - accessible forms
+    - web accessibility
 ---
 
-Form validation errors are one of the most frustrating experiences for screen reader users. When errors appear visually but aren't announced, users submit forms repeatedly without understanding why they fail.
+Picture a screen reader user filling out a signup form. They hit submit, hear nothing change, and try again - because the error appeared as red text on screen, but nothing announced it. This is one of the most common ways forms fail: the validation logic works fine, but nobody told the user what happened. Once labels are in place (see [accessible forms and labels](/topics/html/accessible-forms-and-labels/) if you haven't covered that yet), the next problem to solve is making errors impossible to miss.
 
 ## Associating errors with inputs
 
-Every error message must be programmatically linked to its input using `aria-describedby` :
+Every error message must be programmatically linked to its input using `aria-describedby`:
 
 ```html
 <label for="email">Email address</label>
@@ -23,11 +32,11 @@ Every error message must be programmatically linked to its input using `aria-des
 </span>
 ```
 
-When the screen reader focuses the input, it announces : *"Email address, edit, invalid entry, Please enter a valid email address."*
+When the screen reader focuses the input, it announces: *"Email address, edit, invalid entry, Please enter a valid email address."*
 
 ## `aria-invalid`
 
-Use `aria-invalid` to mark fields that have validation errors :
+Use `aria-invalid` to mark fields that have validation errors:
 
 ```javascript
 function validateField(input, errorEl) {
@@ -50,7 +59,7 @@ function validateField(input, errorEl) {
 
 ## Live region announcements
 
-Use `role="alert"` or `aria-live="assertive"` to announce errors immediately :
+Use `role="alert"` or `aria-live="assertive"` to announce errors immediately:
 
 ```html
 <div role="alert" id="form-errors" aria-atomic="true"></div>
@@ -82,7 +91,7 @@ function showErrors(errors) {
 
 ## Error summary pattern
 
-For forms with multiple errors, show a summary at the top and link each error to its field :
+For forms with multiple errors, show a summary at the top and link each error to its field:
 
 ```html
 <div role="alert" class="error-summary">
@@ -104,7 +113,7 @@ For forms with multiple errors, show a summary at the top and link each error to
 </form>
 ```
 
-Move focus to the error summary after submission :
+Move focus to the error summary after submission:
 
 ```javascript
 form.addEventListener('submit', (e) => {
@@ -122,11 +131,11 @@ form.addEventListener('submit', (e) => {
 
 ## Inline validation timing
 
-Validating while the user is still typing is disruptive. Follow this pattern :
+Validating while the user is still typing is disruptive. Follow this pattern:
 
-1. **On submit** — Always validate all fields
-2. **On blur** — Validate individual fields after the user leaves them
-3. **On input (after error)** — Once a field has an error, re-validate on each keystroke to clear the error as soon as it's fixed
+1. **On submit** - Always validate all fields
+2. **On blur** - Validate individual fields after the user leaves them
+3. **On input (after error)** - Once a field has an error, re-validate on each keystroke to clear the error as soon as it's fixed
 
 ```javascript
 input.addEventListener('blur', () => {
@@ -158,7 +167,7 @@ input[aria-invalid="true"] {
 }
 
 .field-error::before {
-    content: '⚠';
+    content: 'Warning';
 }
 
 .error-summary {
@@ -170,18 +179,18 @@ input[aria-invalid="true"] {
 }
 ```
 
-> **Important :** Never use color alone to indicate errors. Combine color with icons, text, and borders so color-blind users can identify error states.
+> **Important:** Never use color alone to indicate errors. Combine color with icons, text, and borders so color-blind users can identify error states.
 
 ## Common mistakes
 
-- **Only showing a red border** — Without text, screen readers have no idea what's wrong.
-- **Removing error messages on focus** — Users need to read the error while fixing the field.
-- **Clearing the entire form on error** — Users lose all their progress.
-- **Generic error messages** — "Invalid input" doesn't help. Say what's wrong and how to fix it.
-- **Missing `aria-invalid`** — Screen readers use this to announce the error state.
+- **Only showing a red border** - Without text, screen readers have no idea what's wrong.
+- **Removing error messages on focus** - Users need to read the error while fixing the field.
+- **Clearing the entire form on error** - Users lose all their progress.
+- **Generic error messages** - "Invalid input" doesn't help. Say what's wrong and how to fix it.
+- **Missing `aria-invalid`** - Screen readers use this to announce the error state.
 
 ## Resources
 
 - [WAI: Forms Validation](https://www.w3.org/WAI/tutorials/forms/validation/)
-- [GOV.UK Design System — Error messages](https://design-system.service.gov.uk/components/error-message/)
+- [GOV.UK Design System - Error messages](https://design-system.service.gov.uk/components/error-message/)
 - [MDN: aria-invalid](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-invalid)

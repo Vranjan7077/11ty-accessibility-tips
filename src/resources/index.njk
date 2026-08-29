@@ -1,0 +1,32 @@
+---
+title: Resources
+description: Curated blogs, courses, tools, and newsletters from accessibility experts and organizations - separate from this site's own tips and guides.
+layout: layouts/base-home.njk
+pagination:
+  data: collections.resources
+  size: 8
+  alias: paginatedPosts
+  addAllPagesToCollections: true
+eleventyComputed:
+  title: "{% if pagination.pageNumber > 0 %}Resources - Page {{ pagination.pageNumber + 1 }}{% else %}Resources{% endif %}"
+---
+
+<section class="page-intro">
+    <p class="page-intro__eyebrow">Browse</p>
+    <h1 class="page-intro__title">{{ title }}</h1>
+    <p class="page-intro__description">{{ description }}</p>
+</section>
+
+{% for post in paginatedPosts %}
+    {% set showDescription = true %}
+    {% include 'layouts/components/postCard.njk' %}
+{% endfor %}
+
+{% if pagination.pages.length > 1 %}
+    {% set totalItems = collections.resources.length %}
+    {% set startItem = (pagination.pageNumber * pagination.size) + 1 %}
+    {% set endItem = startItem + paginatedPosts.length - 1 %}
+    {% set prevUrl = pagination.href.previous %}
+    {% set nextUrl = pagination.href.next %}
+    {% include 'layouts/components/pagination.njk' %}
+{% endif %}

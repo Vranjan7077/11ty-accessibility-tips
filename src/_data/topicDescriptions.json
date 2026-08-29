@@ -1,0 +1,13 @@
+{
+    "HTML": "Semantic HTML and accessible markup",
+    "CSS": "Focus, contrast, motion, and visual accessibility",
+    "JavaScript": "Keyboard interaction and dynamic content",
+    "ARIA": "Accessible names, states, and relationships",
+    "Keyboard": "Build interfaces that work without a mouse",
+    "Forms": "Labels, validation, and error handling",
+    "Focus": "Managing where keyboard focus goes and why it matters",
+    "Images": "Alt text and other non-text content",
+    "Testing": "Verifying what you built actually works",
+    "Accessibility": "General practices and processes",
+    "UX": "Design decisions that affect everyone's experience"
+}

@@ -1,0 +1,73 @@
+---
+title: Accessibility testing
+description: How to actually verify what you built - automated scans, keyboard testing, screen readers, visual checks, mobile, and the full manual checklist.
+layout: layouts/base-home.njk
+eleventyNavigation:
+  key: Test
+  title: Test
+  order: 3
+---
+
+<section class="page-intro">
+    <p class="page-intro__eyebrow">Testing</p>
+    <h1 class="page-intro__title">{{ title }}</h1>
+    <p class="page-intro__description">{{ description }}</p>
+</section>
+
+<div class="callout">
+    <p>Automated tools can identify many issues, but they cannot replace manual accessibility testing. Use both.</p>
+</div>
+
+<div class="test-categories">
+    <article class="test-category">
+        <h2 class="test-category__heading">Automated testing</h2>
+        <p class="test-category__description">Catches the mechanically-detectable issues - missing alt text, contrast failures, invalid ARIA - so manual testing can focus on what tools can't see: whether the experience actually makes sense.</p>
+        <ul class="test-category__links">
+            <li><a href="{{ collections.post | postUrl('Accessibility testing with JavaScript') }}">Accessibility testing with JavaScript</a></li>
+            <li><a href="{{ collections.post | postUrl('Automated Tools for Testing the accessibility') }}">Automated tools for testing accessibility</a></li>
+        </ul>
+    </article>
+
+    <article class="test-category">
+        <h2 class="test-category__heading">Keyboard testing</h2>
+        <p class="test-category__description">Unplug the mouse. Every interactive element should be reachable and operable with <kbd>Tab</kbd>, <kbd>Shift</kbd>+<kbd>Tab</kbd>, <kbd>Enter</kbd>, <kbd>Space</kbd>, <kbd>Escape</kbd>, and arrow keys alone.</p>
+        <ul class="test-category__links">
+            <li><a href="{{ collections.post | postUrl('Using keyboard for content accessibility') }}">Using keyboard for content accessibility</a></li>
+            <li><a href="{{ collections.post | postUrl('Accessible modals and dialogs') }}">Accessible modals and dialogs</a></li>
+        </ul>
+    </article>
+
+    <article class="test-category">
+        <h2 class="test-category__heading">Screen reader testing</h2>
+        <p class="test-category__description">Automated tools can't tell you whether an experience actually makes sense when heard rather than seen. Test with NVDA, VoiceOver, and TalkBack directly.</p>
+        <ul class="test-category__links">
+            <li><a href="{{ collections.post | postUrl('Screen reader testing guide') }}">Screen reader testing guide</a></li>
+        </ul>
+    </article>
+
+    <article class="test-category">
+        <h2 class="test-category__heading">Visual testing</h2>
+        <p class="test-category__description">Contrast, zoom, reflow, text spacing, reduced motion, and forced-colors mode - checks that need eyes on a real viewport, not just a linter.</p>
+        <ul class="test-category__links">
+            <li><a href="{{ collections.post | postUrl('Color contrast and readability') }}">Color contrast and readability</a></li>
+            <li><a href="{{ collections.post | postUrl('Reduced motion and animations') }}">Reduced motion and animations</a></li>
+            <li><a href="{{ collections.post | postUrl('CSS techniques for accessibility testing') }}">CSS techniques for accessibility testing</a></li>
+        </ul>
+    </article>
+
+    <article class="test-category">
+        <h2 class="test-category__heading">Mobile testing</h2>
+        <p class="test-category__description">Touch target size, spacing, and orientation matter as much on a phone as keyboard access does on a desktop.</p>
+        <ul class="test-category__links">
+            <li><a href="{{ collections.post | postUrl('Touch target size and spacing') }}">Touch target size and spacing</a></li>
+        </ul>
+    </article>
+
+    <article class="test-category">
+        <h2 class="test-category__heading">Manual checklist</h2>
+        <p class="test-category__description">The full page-by-page checklist covering keyboard, screen readers, visual design, forms, media, and ARIA in one place.</p>
+        <ul class="test-category__links">
+            <li><a href="{{ collections.post | postUrl('Accessibility testing checklist') }}">Accessibility testing checklist</a></li>
+        </ul>
+    </article>
+</div>

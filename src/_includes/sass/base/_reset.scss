@@ -5,7 +5,6 @@
 }
 
 :where(html) {
-    color-scheme: dark;
     -webkit-text-size-adjust: none;
 }
 
@@ -16,6 +15,15 @@
 @media (prefers-reduced-motion: no-preference) {
     :where(html:focus-within) {
         scroll-behavior: smooth;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    :where(*, *::before, *::after) {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
     }
 }
 

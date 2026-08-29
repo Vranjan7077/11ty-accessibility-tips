@@ -1,0 +1,45 @@
+---
+layout: layouts/base-home.njk
+pagination:
+  data: collections.topicPages
+  size: 1
+  alias: topicPage
+  addAllPagesToCollections: true
+permalink: "{{ topicPage.url }}"
+eleventyComputed:
+  title: "{% if topicPage.pageNumber > 0 %}{{ topicPage.topic }} tips - Page {{ topicPage.pageNumber + 1 }}{% else %}{{ topicPage.topic }} tips{% endif %}"
+  description: "Every accessibility tip on this site tagged {{ topicPage.topic }}."
+---
+
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+    <ol class="breadcrumbs__list">
+        <li class="breadcrumbs__item">
+            <a class="breadcrumbs__link" href="{{ '/' | url }}">Home</a>
+        </li>
+        <li class="breadcrumbs__item">
+            <a class="breadcrumbs__link" href="{{ '/tips/' | url }}">Tips</a>
+        </li>
+        <li class="breadcrumbs__item">
+            <span class="breadcrumbs__link breadcrumbs__link--current" aria-current="page">{{ topicPage.topic }}</span>
+        </li>
+    </ol>
+</nav>
+<section class="page-intro">
+    <p class="page-intro__eyebrow">Topic</p>
+    <h1 class="page-intro__title">{{ title }}</h1>
+    <p class="page-intro__description">{{ description }}</p>
+</section>
+
+{% for post in topicPage.posts %}
+    {% set showDescription = true %}
+    {% include 'layouts/components/postCard.njk' %}
+{% endfor %}
+
+{% if topicPage.totalPages > 1 %}
+    {% set totalItems = topicPage.totalItems %}
+    {% set startItem = (topicPage.pageNumber * topicPage.pageSize) + 1 %}
+    {% set endItem = startItem + topicPage.posts.length - 1 %}
+    {% set prevUrl = topicPage.prevUrl %}
+    {% set nextUrl = topicPage.nextUrl %}
+    {% include 'layouts/components/pagination.njk' %}
+{% endif %}

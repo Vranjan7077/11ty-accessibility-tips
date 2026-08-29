@@ -6,58 +6,77 @@ eleventyNavigation:
   key: Home
   title: Home
   order: 1
-pagination:
-  data: collections.sortedByDate
-  size: 6
-  alias: paginatedPosts
 ---
 
-{% if pagination.pageNumber == 0 %}
 <div class="hero">
-    <h1 class="hero__heading">Best practices of accessibility in front-end development</h1>
-    <p class="hero__description">Tips, tricks and tools for building inclusive, accessible web applications.</p>
+    <h1 class="hero__heading">Build interfaces everyone can use</h1>
+    <p class="hero__description">Practical accessibility guidance for frontend developers.</p>
+    <p class="hero__actions">
+        <a class="pagination__link pagination__link--next" href="{{ '/tips/' | url }}">Explore accessibility</a>
+        <a class="pagination__link" href="{{ '/test/' | url }}">Start testing</a>
+    </p>
 </div>
-{% endif %}
 
-{%- for post in paginatedPosts -%}
-    {% set showDescription = true %}
-    {% include 'layouts/components/postCard.njk' %}
+{%- set topicPages0 = [] -%}
+{%- for topicPage in collections.topicPages -%}
+    {%- if topicPage.pageNumber == 0 -%}
+        {%- set noop = topicPages0.push(topicPage) -%}
+    {%- endif -%}
 {%- endfor -%}
 
-{% set totalItems = collections.sortedByTitle.length %}
-{% set currentPage = pagination.pageNumber %}
-{% set pageSize = pagination.size %}
-{% set startItem = (currentPage * pageSize) + 1 %}
-{% set endItem = startItem + paginatedPosts.length - 1 %}
+{%- set explorePriority = ['HTML', 'CSS', 'JavaScript', 'ARIA', 'Keyboard', 'Forms'] -%}
+{%- set exploreTopics = [] -%}
+{%- for name in explorePriority -%}
+    {%- for t in topicPages0 -%}
+        {%- if t.topic == name -%}
+            {%- set noop = exploreTopics.push(t) -%}
+        {%- endif -%}
+    {%- endfor -%}
+{%- endfor -%}
 
-<nav class="pagination" aria-label="Pagination">
-    <div class="pagination__inner">
-        {% if pagination.href.previous %}
-            <a href="{{ pagination.href.previous }}" class="pagination__link pagination__link--prev" aria-label="Go to previous page">
-                <span class="pagination__chevron" aria-hidden="true">&lsaquo;</span>
-                Prev
+{% if exploreTopics.length %}
+<section class="home-section" aria-labelledby="explore-heading">
+    <h2 id="explore-heading" class="home-section__heading">Explore accessibility</h2>
+    <div class="topic-cards">
+        {% for t in exploreTopics %}
+            <a class="topic-card" href="{{ t.url | url }}">
+                <span class="topic-card__name">{{ t.topic }}</span>
+                <span class="topic-card__description">{{ topicDescriptions[t.topic] }}</span>
             </a>
-        {% else %}
-            <span class="pagination__link pagination__link--prev pagination__link--disabled" aria-disabled="true">
-                <span class="pagination__chevron" aria-hidden="true">&lsaquo;</span>
-                Prev
-            </span>
-        {% endif %}
-
-        <span class="pagination__info">
-            Showing <strong>{{ startItem }} - {{ endItem }}</strong> of <strong>{{ totalItems }}</strong>
-        </span>
-
-        {% if pagination.href.next %}
-            <a href="{{ pagination.href.next }}" class="pagination__link pagination__link--next" aria-label="Go to next page">
-                Next
-                <span class="pagination__chevron" aria-hidden="true">&rsaquo;</span>
-            </a>
-        {% else %}
-            <span class="pagination__link pagination__link--next pagination__link--disabled" aria-disabled="true">
-                Next
-                <span class="pagination__chevron" aria-hidden="true">&rsaquo;</span>
-            </span>
-        {% endif %}
+        {% endfor %}
     </div>
-</nav>
+</section>
+{% endif %}
+
+{% set featured = collections.sortedByDate | featuredPosts(4) %}
+{% if featured.length %}
+<section class="home-section" aria-labelledby="featured-heading">
+    <h2 id="featured-heading" class="home-section__heading">Featured guides</h2>
+    {% for post in featured %}
+        {% set showDescription = true %}
+        {% include 'layouts/components/postCard.njk' %}
+    {% endfor %}
+</section>
+{% endif %}
+
+<section class="home-section" aria-labelledby="testing-heading">
+    <h2 id="testing-heading" class="home-section__heading">Accessibility testing</h2>
+    <div class="callout">
+        <p>Automated tools can identify many issues, but they cannot replace manual accessibility testing.</p>
+        <a class="pagination__link pagination__link--next" href="{{ '/test/' | url }}">
+            Start testing
+            <span class="pagination__chevron" aria-hidden="true">&rsaquo;</span>
+        </a>
+    </div>
+</section>
+
+{% if topicPages0.length %}
+<section class="home-section" aria-labelledby="popular-topics-heading">
+    <h2 id="popular-topics-heading" class="home-section__heading">Popular topics</h2>
+    <ul class="popular-topics">
+        {% for t in topicPages0 | sort(true, false, 'totalItems') %}
+            <li><a class="popular-topics__link" href="{{ t.url | url }}">{{ t.topic }} <span class="popular-topics__count">{{ t.totalItems }}</span></a></li>
+        {% endfor %}
+    </ul>
+</section>
+{% endif %}

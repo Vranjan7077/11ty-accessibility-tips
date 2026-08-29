@@ -1,14 +1,23 @@
 ---
 title: CSS techniques for accessibility testing
 description: Using CSS to visually detect accessibility issues like missing alt text, empty links, improper heading order, and missing ARIA labels during development.
+
 topics: CSS
+
+keywords:
+    - css accessibility testing
+    - debug accessibility with css
+    - missing alt text css
+    - heading order css
+    - aria label testing
+    - web accessibility
 ---
 
-CSS can act as a visual linting tool during development. By using attribute selectors and pseudo-elements, you can highlight accessibility violations directly in the browser — no extensions needed.
+CSS can act as a visual linting tool during development. By using attribute selectors and pseudo-elements, you can highlight accessibility violations directly in the browser, no extensions needed. One caveat before diving in: every technique below is a debug aid meant for your local environment. The `!important` outlines and generated-content labels are loud on purpose - strip them out (or gate them behind a dev-only stylesheet, see the bookmarklet toggle near the end) before anything ships.
 
 ## Missing alt text on images
 
-Images without `alt` attributes or with empty `alt` on non-decorative images :
+Images without `alt` attributes or with empty `alt` on non-decorative images - for the full picture on what good alt text actually looks like, see [indicate img elements that miss alt attribute](/topics/css/indicate-img-elements-that-miss-alt-attribute/):
 
 ```css
 img:not([alt]) {
@@ -25,7 +34,7 @@ Images with `alt=""` are treated as decorative. The orange outline reminds you t
 
 ## Empty links and buttons
 
-Interactive elements with no text content are invisible to screen readers :
+Interactive elements with no text content are invisible to screen readers:
 
 ```css
 a:empty,
@@ -40,7 +49,7 @@ a:not([href]) {
 
 ## Missing form labels
 
-Inputs without associated labels :
+Inputs without associated labels - [accessible forms and labels](/topics/html/accessible-forms-and-labels/) covers the full labeling story, including why this CSS check alone can't catch every case:
 
 ```css
 input:not([type="hidden"]):not([type="submit"]):not([type="button"]):not([aria-label]):not([aria-labelledby]) {
@@ -56,11 +65,11 @@ textarea:not([aria-label]):not([aria-labelledby]) {
 }
 ```
 
-> **Note :** This is a rough heuristic. Inputs with programmatically associated `<label>` elements via `for`/`id` won't be caught by CSS alone since CSS can't detect the association.
+> **Note:** This is a rough heuristic. Inputs with programmatically associated `<label>` elements via `for`/`id` won't be caught by CSS alone since CSS can't detect the association.
 
 ## Missing ARIA labels on landmarks
 
-Landmarks that need differentiation when there are multiples on a page :
+Landmarks that need differentiation when there are multiples on a page:
 
 ```css
 nav:not([aria-label]):not([aria-labelledby]) {
@@ -78,7 +87,7 @@ section:not([aria-label]):not([aria-labelledby]) {
 
 ## Focus visibility
 
-Detect elements that suppress focus outlines :
+Detect elements that suppress focus outlines:
 
 ```css
 *:focus {
@@ -86,7 +95,7 @@ Detect elements that suppress focus outlines :
 }
 ```
 
-If you see the above in your codebase, it's a red flag. Replace it with :
+If you see the above in your codebase, it's a red flag. Replace it with:
 
 ```css
 *:focus-visible {
@@ -103,7 +112,7 @@ This removes outline only for mouse clicks while keeping it for keyboard navigat
 
 ## Touch target visualization
 
-Highlight elements that may be too small for touch interaction :
+Highlight elements that may be too small for touch interaction - see [touch target size and spacing](/topics/css/touch-target-size-and-spacing/) for what "too small" actually means under WCAG 2.2:
 
 ```css
 a,
@@ -130,7 +139,7 @@ button::after,
 
 ## Heading hierarchy check
 
-Headings should follow a logical order (h1 → h2 → h3). Use CSS to display heading levels :
+Headings should follow a logical order (h1 -> h2 -> h3) - [avoid skipping heading levels](/topics/accessibility/avoid-skipping-heading-levels/) explains why this matters and what actually counts as "skipping." Use CSS to display heading levels:
 
 ```css
 h1::before,
@@ -159,7 +168,7 @@ h6::before { content: 'H6'; background: #ef4444; }
 
 ## Showing landmark regions
 
-Visualize the landmark structure of a page :
+Visualize the landmark structure of a page:
 
 ```css
 header { outline: 2px solid #22c55e !important; }
@@ -194,7 +203,7 @@ footer::before {
 
 ## Color contrast debugging
 
-Display contrast information using DevTools-free techniques :
+Display contrast information using DevTools-free techniques - for the actual ratios you need to hit, see [color contrast and readability](/topics/css/color-contrast-and-readability/):
 
 ```css
 body {
@@ -225,7 +234,7 @@ body { filter: url('#protanopia'); }
 
 ## Creating a debug stylesheet
 
-Bundle all checks into a single file you can toggle during development :
+Bundle all checks into a single file you can toggle during development:
 
 ```css
 /* a11y-debug.css */
@@ -251,7 +260,7 @@ a:empty, button:empty {
 }
 ```
 
-Toggle it with a bookmarklet :
+Toggle it with a bookmarklet:
 
 ```javascript
 javascript:void(function(){
@@ -269,19 +278,19 @@ javascript:void(function(){
 
 ### Chrome
 
-- Elements → Accessibility pane → view computed ARIA properties
-- Rendering → Emulate `prefers-reduced-motion` / `prefers-color-scheme`
-- Lighthouse → Accessibility audit
+- Elements -> Accessibility pane -> view computed ARIA properties
+- Rendering -> Emulate `prefers-reduced-motion` / `prefers-color-scheme`
+- Lighthouse -> Accessibility audit
 
 ### Firefox
 
-- Accessibility tab → full accessibility tree
-- Check for Issues → Contrast, Keyboard, Text Labels
-- Simulate → color blindness types
+- Accessibility tab -> full accessibility tree
+- Check for Issues -> Contrast, Keyboard, Text Labels
+- Simulate -> color blindness types
 
 ## Resources
 
-- [Diagnostic.css — Karl Groves](https://github.com/karlgroves/diagnostic.css)
+- [Diagnostic.css - Karl Groves](https://github.com/karlgroves/diagnostic.css)
 - [a11y.css](https://ffoodd.github.io/a11y.css/)
 - [Chrome DevTools Accessibility features](https://developer.chrome.com/docs/devtools/accessibility/)
 - [Firefox Accessibility Inspector](https://firefox-source-docs.mozilla.org/devtools-user/accessibility_inspector/)

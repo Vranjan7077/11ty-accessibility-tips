@@ -1,16 +1,15 @@
-import fs from 'node:fs';
 import fg from 'fast-glob';
 import path from 'node:path';
 import { createRequire } from 'node:module';
 import pluginRss from '@11ty/eleventy-plugin-rss';
 import syntaxHighlight from '@11ty/eleventy-plugin-syntaxhighlight';
 import EleventyNavigationPlugin from '@11ty/eleventy-navigation';
+import { eleventyImageTransformPlugin } from '@11ty/eleventy-img';
 
 const require = createRequire(import.meta.url);
 const markdown = require('./src/_11ty/markdownIt');
 
 const configDir = './src/_11ty';
-const cssPath = path.resolve('src/css/main.css');
 const isServe = process.env.ELEVENTY_RUN_MODE === 'serve';
 
 function registerFromGlob(globPattern, register, loader = require) {
@@ -20,38 +19,43 @@ function registerFromGlob(globPattern, register, loader = require) {
 }
 
 export default function (eleventyConfig) {
-    // --- Plugins ---
     eleventyConfig.addPlugin(pluginRss);
     eleventyConfig.addPlugin(syntaxHighlight);
     eleventyConfig.addPlugin(EleventyNavigationPlugin);
+    eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
+        widths: [400, 800, 1200, 'auto'],
+        formats: ['avif', 'webp', 'jpeg'],
+        outputDir: './public/assets/img/optimized/',
+        urlPath: '/assets/img/optimized/',
+        htmlOptions: {
+            imgAttributes: {
+                loading: 'lazy',
+                decoding: 'async',
+                sizes: '(min-width: 48rem) 48rem, 100vw',
+            },
+        },
+    });
 
-    // --- Markdown ---
     eleventyConfig.setLibrary('md', markdown);
 
-    // --- Collections, Filters, Shortcodes, Transforms ---
     registerFromGlob(`${configDir}/collections/[^_]*.js`, eleventyConfig.addCollection.bind(eleventyConfig));
     registerFromGlob(`${configDir}/filters/[^_]*.js`, eleventyConfig.addFilter.bind(eleventyConfig));
     registerFromGlob(`${configDir}/shortcodes/[^_]*.js`, eleventyConfig.addShortcode.bind(eleventyConfig));
     registerFromGlob(`${configDir}/transforms/[^_]*.js`, eleventyConfig.addTransform.bind(eleventyConfig));
 
-    // --- Shortcodes ---
     eleventyConfig.addShortcode('year', () => `${new Date().getFullYear()}`);
-    eleventyConfig.addShortcode('inlineCSS', () => fs.readFileSync(cssPath, 'utf-8'));
 
-    // --- Assets ---
     eleventyConfig.addPassthroughCopy({ './src/assets': 'assets' });
-    eleventyConfig.addPassthroughCopy({ './src/_redirects': '_redirects' });
+    eleventyConfig.addPassthroughCopy({ './src/css/main.css': 'assets/css/main.css' });
     eleventyConfig.addWatchTarget('./src/_includes/sass');
     eleventyConfig.addWatchTarget('./src/css');
 
-    // --- Dev Server ---
     eleventyConfig.setServerOptions({
         port: 3000,
         liveReload: true,
         domDiff: true,
     });
 
-    // --- Dev-only: Prettier formatting ---
     if (isServe) {
         eleventyConfig.addTransform('prettier', async function (content) {
             if ((this.page.outputPath || '').endsWith('.html')) {
@@ -67,7 +71,6 @@ export default function (eleventyConfig) {
         });
     }
 
-    // --- Eleventy Config ---
     return {
         dir: {
             input: 'src',

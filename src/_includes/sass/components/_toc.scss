@@ -1,0 +1,38 @@
+@use '../abstracts/' as *;
+
+.toc {
+    @include panel(0.75rem, $color-border, $color-surface);
+    padding: $space-md $space-lg;
+    margin-bottom: $space-xl;
+
+    &__summary {
+        cursor: pointer;
+        font-weight: $font-weight-bold;
+        color: $color-100;
+        font-size: 0.95rem;
+        padding: $space-xs 0;
+    }
+
+    &__nav {
+        margin-top: $space-md;
+    }
+
+    &__list,
+    &__sublist {
+        list-style: none;
+    }
+
+    &__sublist {
+        margin-left: $space-lg;
+        margin-top: $space-xs;
+    }
+
+    li {
+        margin-bottom: $space-xs;
+    }
+
+    a {
+        @include interactive-link($color-accent, $color-primary);
+        font-size: 0.9rem;
+    }
+}

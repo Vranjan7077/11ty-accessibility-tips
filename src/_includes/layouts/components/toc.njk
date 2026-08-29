@@ -1,0 +1,22 @@
+{% set toc = content | tableOfContents %}
+{% if toc.length >= 3 %}
+<details class="toc" open>
+    <summary class="toc__summary">On this page</summary>
+    <nav class="toc__nav" aria-label="Table of contents">
+        <ol class="toc__list">
+            {% for item in toc %}
+                <li>
+                    <a href="#{{ item.id }}">{{ item.text }}</a>
+                    {% if item.children.length %}
+                        <ol class="toc__sublist">
+                            {% for child in item.children %}
+                                <li><a href="#{{ child.id }}">{{ child.text }}</a></li>
+                            {% endfor %}
+                        </ol>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ol>
+    </nav>
+</details>
+{% endif %}

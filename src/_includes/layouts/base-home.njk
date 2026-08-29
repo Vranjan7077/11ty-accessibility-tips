@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html class="scroll-smooth" {% if section %} data-current="{{ section }}"{% endif %} lang="en">
+<html {% if section %}data-current="{{ section }}" {% endif %}lang="en">
     {% include "layouts/components/head.njk" %}
     <body>
         <a href="#main-content" class="skip-link">Skip to main content</a>
-        <main id="main-content" class="container">
+        {% include "layouts/components/site-header.njk" %}
+        <main id="main-content" class="container" tabindex="-1">
             {% block content %}
                 {{ content | safe }}
             {% endblock content %}

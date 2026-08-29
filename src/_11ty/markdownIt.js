@@ -8,7 +8,7 @@ let markdown = {
     typographer: true,
 };
 
-module.exports = markdownIt(markdown).use(markdownItAnchor, {
+const md = markdownIt(markdown).use(markdownItAnchor, {
     permalink: markdownItAnchor.permalink.ariaHidden({
         placement: 'after',
         class: 'heading-anchor',
@@ -17,3 +17,18 @@ module.exports = markdownIt(markdown).use(markdownItAnchor, {
         level: [2, 3],
     }),
 });
+
+const defaultImageRule =
+    md.renderer.rules.image ||
+    function (tokens, idx, options, env, self) {
+        return self.renderToken(tokens, idx, options);
+    };
+
+md.renderer.rules.image = function (tokens, idx, options, env, self) {
+    const token = tokens[idx];
+    token.attrSet('loading', 'lazy');
+    token.attrSet('decoding', 'async');
+    return defaultImageRule(tokens, idx, options, env, self);
+};
+
+module.exports = md;

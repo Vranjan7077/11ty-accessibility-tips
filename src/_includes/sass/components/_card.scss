@@ -14,7 +14,7 @@
                 box-shadow $transition-base;
 
     &:hover {
-        @include interactive-panel(-2px, $color-surface-hover, $color-border-hover, 0 8px 24px rgba(0, 0, 0, 0.2));
+        @include interactive-panel(-2px, $color-surface-hover, $color-border-hover, 0 8px 24px $shadow-color);
 
         .card__link {
             color: $color-primary;
@@ -52,7 +52,8 @@
         }
 
         &:focus-visible {
-            outline: none;
+            outline: 2px solid $color-primary;
+            outline-offset: 2px;
         }
 
         &:hover {
@@ -76,8 +77,13 @@
     }
 
     &__topics {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $space-xs;
         font-size: 0.8rem;
         font-style: normal;
         margin-top: $space-xs;
+        position: relative;
+        z-index: 1;
     }
 }

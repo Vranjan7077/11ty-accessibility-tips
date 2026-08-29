@@ -8,22 +8,23 @@ $font-weight-semibold: 700;
 $font-weight-extrabold: 800;
 $font-weight-normal: normal;
 
-$bg-color-100: #1a202c;
-$bg-color-200: #232b3b;
-$bg-color-300: #2d3748;
-$color-100: #cbd5e0;
-$color-200: #a0aec0;
-$color-300: #718096;
+$bg-color-100: var(--bg-color-100);
+$bg-color-200: var(--bg-color-200);
+$bg-color-300: var(--bg-color-300);
+$color-100: var(--color-100);
+$color-200: var(--color-200);
+$color-300: var(--color-300);
 
-$color-primary: #818cf8;
-$color-primary-dim: #6366f1;
-$color-accent: #70b5f9;
-$color-tag-bg: rgba(129, 140, 248, 0.12);
-$color-tag-text: #a5b4fc;
-$color-surface: rgba(255, 255, 255, 0.03);
-$color-surface-hover: rgba(255, 255, 255, 0.06);
-$color-border: rgba(203, 213, 224, 0.1);
-$color-border-hover: rgba(203, 213, 224, 0.2);
+$color-primary: var(--color-primary);
+$color-primary-dim: var(--color-primary-dim);
+$color-accent: var(--color-accent);
+$color-tag-bg: var(--color-tag-bg);
+$color-tag-text: var(--color-tag-text);
+$color-surface: var(--color-surface);
+$color-surface-hover: var(--color-surface-hover);
+$color-border: var(--color-border);
+$color-border-hover: var(--color-border-hover);
+$shadow-color: var(--shadow-color);
 
 $space-xs: 0.25rem;
 $space-sm: 0.5rem;

@@ -1,10 +1,10 @@
-const htmlmin = require('html-minifier');
+const { minify } = require('html-minifier-terser');
 
-module.exports = function htmlMinTransform(content, outputPath) {
+module.exports = async function htmlMinTransform(content, outputPath) {
     if (outputPath && outputPath.endsWith('.html')) {
         content = content.replace(/class="heading-anchor"/g, 'class="heading-anchor" tabindex="-1"');
 
-        let minified = htmlmin.minify(content, {
+        return minify(content, {
             useShortDoctype: true,
             removeComments: true,
             collapseWhitespace: true,
@@ -15,7 +15,6 @@ module.exports = function htmlMinTransform(content, outputPath) {
             removeScriptTypeAttributes: true,
             removeTagWhitespace: false,
         });
-        return minified;
     }
 
     return content;

@@ -1,0 +1,22 @@
+@use '../abstracts/' as *;
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.75rem;
+    font-weight: $font-weight-medium;
+    padding: 0.3em 0.7em;
+    border-radius: 0.4rem;
+    border: 1px solid $color-border;
+    color: $color-200;
+    background-color: $color-surface;
+
+    &--tech {
+        color: $color-100;
+    }
+
+    &--wcag {
+        color: $color-tag-text;
+        border-color: rgba(129, 140, 248, 0.25);
+    }
+}

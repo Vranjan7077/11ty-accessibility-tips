@@ -1,0 +1,194 @@
+@use '../abstracts/' as *;
+
+.search-trigger {
+    @include panel(0.6rem, $color-border, $color-surface);
+    display: inline-flex;
+    align-items: center;
+    gap: $space-sm;
+    padding: 0.6rem $space-md;
+    color: $color-200;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: background-color $transition-fast, border-color $transition-fast, color $transition-fast;
+
+    &__icon {
+        flex-shrink: 0;
+        width: 1rem;
+        height: 1rem;
+        color: $color-300;
+        transition: color $transition-fast;
+    }
+
+    &__label {
+        white-space: nowrap;
+    }
+
+    &__keys {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        margin-left: $space-xs;
+    }
+
+    kbd {
+        font-family: inherit;
+        font-size: 0.7rem;
+        font-weight: $font-weight-medium;
+        line-height: 1;
+        padding: 0.35em 0.5em;
+        border-radius: 0.3rem;
+        border: 1px solid $color-border-hover;
+        background-color: $bg-color-300;
+        color: $color-200;
+    }
+
+    &:hover,
+    &:focus-visible {
+        background-color: $color-surface-hover;
+        border-color: $color-border-hover;
+        color: $color-100;
+    }
+
+    &:hover &__icon,
+    &:focus-visible &__icon {
+        color: $color-100;
+    }
+}
+
+.search-dialog {
+    margin: auto;
+    width: min(32rem, calc(100vw - #{$space-xl}));
+    max-height: min(32rem, 80vh);
+    padding: 0;
+    border: 1px solid $color-border-hover;
+    border-radius: 0.75rem;
+    background-color: $bg-color-200;
+    color: $color-100;
+    box-shadow: 0 16px 48px $shadow-color;
+
+    &::backdrop {
+        background-color: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(2px);
+    }
+
+    &__inner {
+        display: flex;
+        flex-direction: column;
+        max-height: min(32rem, 80vh);
+    }
+
+    &__form {
+        display: flex;
+        align-items: center;
+        gap: $space-sm;
+        padding: $space-md $space-lg;
+        border-bottom: 1px solid $color-border;
+    }
+
+    &__icon {
+        flex-shrink: 0;
+        width: 1.15rem;
+        height: 1.15rem;
+        color: $color-300;
+    }
+
+    &__input {
+        flex: 1;
+        background-color: $color-surface;
+        border: 1px solid $color-border;
+        border-radius: 0.5rem;
+        padding: 0.5rem 0.75rem;
+        color: $color-100;
+        font-size: 1rem;
+        min-width: 0;
+        transition: border-color $transition-fast, background-color $transition-fast;
+
+        &::placeholder {
+            color: $color-300;
+        }
+
+        &::-webkit-search-cancel-button {
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        &:hover {
+            border-color: $color-border-hover;
+        }
+
+        &:focus-visible {
+            outline: 2px solid $color-primary;
+            outline-offset: 2px;
+            border-color: $color-primary;
+        }
+    }
+
+    &__close {
+        flex-shrink: 0;
+        background: none;
+        border: none;
+        color: $color-300;
+        cursor: pointer;
+        padding: $space-xs;
+        width: 2rem;
+        height: 2rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0.4rem;
+        transition: background-color $transition-fast, color $transition-fast;
+
+        svg {
+            width: 1.1rem;
+            height: 1.1rem;
+        }
+
+        &:hover {
+            color: $color-100;
+            background-color: $color-surface-hover;
+        }
+
+        &:focus-visible {
+            outline: 2px solid $color-primary;
+            outline-offset: 2px;
+        }
+    }
+
+    &__status {
+        padding: $space-md $space-lg;
+        font-size: 0.8rem;
+        color: $color-300;
+    }
+
+    &__results {
+        list-style: none;
+        overflow-y: auto;
+        padding: $space-sm;
+    }
+
+    &__result {
+        display: flex;
+        flex-direction: column;
+        gap: 0.1rem;
+        padding: $space-sm $space-md;
+        border-radius: 0.5rem;
+        text-decoration: none;
+
+        &:hover,
+        &:focus-visible {
+            background-color: $color-surface-hover;
+        }
+    }
+
+    &__result-title {
+        color: $color-100;
+        font-weight: $font-weight-medium;
+        font-size: 0.95rem;
+    }
+
+    &__result-meta {
+        color: $color-300;
+        font-size: 0.75rem;
+        text-transform: capitalize;
+    }
+}

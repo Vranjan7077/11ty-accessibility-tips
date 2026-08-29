@@ -1,12 +1,21 @@
 ---
 title: Accessible navigation and skip links
 description: Building accessible nav structures with skip links, breadcrumbs, mega menus, and proper aria-current usage for screen readers.
+
 topics: HTML
+
+keywords:
+    - accessible navigation
+    - skip links
+    - breadcrumb accessibility
+    - keyboard navigation
+    - aria-current navigation
+    - web accessibility
 ---
 
 Navigation is one of the first things a screen reader or keyboard user encounters. A well-structured, accessible navigation system makes the difference between a usable site and an unusable one.
 
-## Skip links — bypassing repeated content
+## Skip links - bypassing repeated content
 
 Keyboard users must tab through every link in the header and navigation before reaching the main content on every page load. A **skip link** solves this by allowing them to jump directly to the main content.
 
@@ -49,7 +58,7 @@ Keyboard users must tab through every link in the header and navigation before r
 
 ### Label multiple navigations
 
-When a page has more than one `<nav>`, each must have a unique label :
+When a page has more than one `<nav>`, each must have a unique label:
 
 ```html
 <nav aria-label="Primary">
@@ -70,7 +79,7 @@ When a page has more than one `<nav>`, each must have a unique label :
 
 ### Indicate the current page
 
-Use `aria-current="page"` to tell screen readers which link represents the currently active page :
+Use `aria-current="page"` to tell screen readers which link represents the currently active page:
 
 ```html
 <nav aria-label="Primary">
@@ -86,7 +95,7 @@ This is far more reliable than relying on visual styles like "active" classes, w
 
 ## Breadcrumb navigation
 
-Breadcrumbs help users understand their position in the site hierarchy :
+Breadcrumbs help users understand their position in the site hierarchy:
 
 ```html
 <nav aria-label="Breadcrumb">
@@ -99,7 +108,7 @@ Breadcrumbs help users understand their position in the site hierarchy :
 ```
 
 ```css
-/* Visual separators using CSS — not announced by screen readers */
+/* Visual separators using CSS - not announced by screen readers */
 nav[aria-label="Breadcrumb"] ol {
     display: flex;
     list-style: none;
@@ -113,13 +122,13 @@ nav[aria-label="Breadcrumb"] li + li::before {
 }
 ```
 
-> **Note :** Use `<ol>` (ordered list) for breadcrumbs since the order matters. The CSS-generated separator (`/`) is invisible to screen readers, avoiding noisy "slash" announcements.
+> **Note:** Use `<ol>` (ordered list) for breadcrumbs since the order matters. The CSS-generated separator (`/`) is invisible to screen readers, avoiding noisy "slash" announcements.
 
 ## Scenarios and Edge Cases
 
 ### Mega menus
 
-Large navigation menus (mega menus) require careful implementation :
+Large navigation menus (mega menus) require careful implementation:
 
 -   Use `aria-expanded` on the trigger button to indicate menu state.
 -   Add `aria-haspopup="true"` on the trigger to indicate a submenu exists.
@@ -154,7 +163,7 @@ Large navigation menus (mega menus) require careful implementation :
     aria-controls="mobile-menu"
     aria-label="Open navigation menu"
 >
-    <span class="hamburger-icon" aria-hidden="true">☰</span>
+    <span class="hamburger-icon" aria-hidden="true">Menu</span>
 </button>
 
 <nav id="mobile-menu" aria-label="Mobile navigation" hidden>
@@ -167,34 +176,11 @@ Large navigation menus (mega menus) require careful implementation :
 
 ### Single-page application (SPA) navigation
 
-In SPAs, route changes don't trigger a page reload, so screen readers have no way of knowing content has changed :
-
--   **Announce the new page :** Update `document.title` and announce it via an `aria-live` region.
--   **Move focus :** Focus the new page's `<h1>` or `<main>` element.
--   **Update `aria-current` :** Reflect the new active route in the navigation.
-
-```javascript
-function onRouteChange(newTitle) {
-    document.title = newTitle;
-
-    // Announce to screen readers
-    const announcer = document.getElementById('route-announcer');
-    announcer.textContent = newTitle;
-
-    // Move focus
-    const heading = document.querySelector('h1');
-    heading.setAttribute('tabindex', '-1');
-    heading.focus();
-}
-```
-
-```html
-<div id="route-announcer" aria-live="assertive" class="sr-only"></div>
-```
+In SPAs, route changes don't trigger a page reload, so screen readers have no way of knowing content has changed - you have to announce it and move focus yourself. That's a big enough topic to deserve its own space: see [focus management in SPAs](/topics/javascript/focus-management-in-spas/) for the full pattern, including the framework-specific React and Angular examples.
 
 ### Pagination
 
-Paginated lists should announce the current page and total within the navigation :
+Paginated lists should announce the current page and total within the navigation:
 
 ```html
 <nav aria-label="Pagination">
@@ -209,5 +195,7 @@ Paginated lists should announce the current page and total within the navigation
 ### Resources
 
 -   [WebAIM: Skip Navigation](https://webaim.org/techniques/skipnav/)
--   [WAI-ARIA Practices — Navigation Menubar](https://www.w3.org/WAI/ARIA/apg/patterns/menubar/)
--   [W3C — Navigation Landmark](https://www.w3.org/WAI/ARIA/apg/practices/landmark-regions/)
+-   [WAI-ARIA Practices - Navigation Menubar](https://www.w3.org/WAI/ARIA/apg/patterns/menubar/)
+-   [W3C - Navigation Landmark](https://www.w3.org/WAI/ARIA/apg/practices/landmark-regions/)
+
+For how `<nav>` fits alongside the rest of the page's landmarks, see [HTML landmarks for accessibility](/topics/html/html-landmarks-for-accessibility/). For the ARIA attributes used throughout this post (`aria-expanded`, `aria-haspopup`, `aria-current`), see [ARIA roles, states, and properties](/topics/aria/aria-roles-states-and-properties/).

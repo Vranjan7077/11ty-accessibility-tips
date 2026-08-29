@@ -1,21 +1,30 @@
 ---
 title: Reduced motion and animations
-description: Respecting user motion preferences with prefers-reduced-motion, managing auto-playing content, and designing animations that don't cause harm.
+description: Respecting user motion preferences with prefers-reduced-motion, managing auto-playing content, and designing animations that do not cause harm.
+
 topics: CSS
+
+keywords:
+    - prefers-reduced-motion
+    - reduced motion accessibility
+    - animation accessibility
+    - wcag pause stop hide
+    - motion sensitivity web design
+    - web accessibility
 ---
 
 Animations can cause serious physical discomfort for people with vestibular disorders, epilepsy, or motion sensitivity. WCAG requires that motion can be paused, stopped, or disabled.
 
 ## Who is affected
 
-- **Vestibular disorders** — Parallax scrolling, zooming animations, and sliding transitions can cause vertigo, nausea, and migraines.
-- **Epilepsy** — Flashing content faster than 3 times per second can trigger seizures (WCAG 2.3.1).
-- **ADHD and cognitive disabilities** — Constant motion is distracting and makes it harder to focus on content.
-- **Motion sickness** — Even subtle animations can cause discomfort during extended use.
+- **Vestibular disorders** - Parallax scrolling, zooming animations, and sliding transitions can cause vertigo, nausea, and migraines.
+- **Epilepsy** - Flashing content faster than 3 times per second can trigger seizures (WCAG 2.3.1).
+- **ADHD and cognitive disabilities** - Constant motion is distracting and makes it harder to focus on content.
+- **Motion sickness** - Even subtle animations can cause discomfort during extended use.
 
 ## `prefers-reduced-motion`
 
-Users can enable "Reduce motion" in their operating system settings. CSS can detect this :
+Users can enable "Reduce motion" in their operating system settings. CSS can detect this:
 
 ```css
 @media (prefers-reduced-motion: reduce) {
@@ -30,11 +39,11 @@ Users can enable "Reduce motion" in their operating system settings. CSS can det
 }
 ```
 
-> **Note :** Setting duration to `0.01ms` instead of `0s` ensures `animationend` and `transitionend` events still fire. This prevents JavaScript that relies on these events from breaking.
+> **Note:** Setting duration to `0.01ms` instead of `0s` ensures `animationend` and `transitionend` events still fire. This prevents JavaScript that relies on these events from breaking.
 
 ## Progressive enhancement approach
 
-Instead of removing motion for those who need it, add motion only for those who want it :
+Instead of removing motion for those who need it, add motion only for those who want it:
 
 ```css
 .card {
@@ -74,14 +83,14 @@ prefersReducedMotion.addEventListener('change', (event) => {
 
 ## Auto-playing content
 
-WCAG 2.2.2 requires that auto-moving content can be paused, stopped, or hidden :
+WCAG 2.2.2 requires that auto-moving content can be paused, stopped, or hidden:
 
 ```html
 <div class="banner" role="region" aria-label="Announcements">
     <div class="banner__content" id="banner-content">
         Special offer: 20% off all plans
     </div>
-    <button aria-label="Pause announcements" id="pause-btn">⏸</button>
+    <button aria-label="Pause announcements" id="pause-btn">Pause</button>
 </div>
 ```
 
@@ -93,8 +102,8 @@ let isPaused = false;
 pauseBtn.addEventListener('click', () => {
     isPaused = !isPaused;
     banner.style.animationPlayState = isPaused ? 'paused' : 'running';
-    pauseBtn.textContent = isPaused ? '▶' : '⏸';
-    pauseBtn.setAttribute('aria-label', 
+    pauseBtn.textContent = isPaused ? 'Play' : 'Pause';
+    pauseBtn.setAttribute('aria-label',
         isPaused ? 'Resume announcements' : 'Pause announcements'
     );
 });
@@ -125,7 +134,7 @@ pauseBtn.addEventListener('click', () => {
 
 ## Loading spinners
 
-Replace spinning animations with progress indicators when reduced motion is enabled :
+Replace spinning animations with progress indicators when reduced motion is enabled:
 
 ```css
 .spinner {
@@ -153,7 +162,7 @@ Replace spinning animations with progress indicators when reduced motion is enab
 
 ## Scroll-linked animations
 
-The `scroll-timeline` CSS feature should also respect motion preferences :
+The `scroll-timeline` CSS feature should also respect motion preferences. Worth knowing before you reach for it: `animation-timeline: scroll()` currently only ships in Chromium browsers, so treat it as a progressive enhancement rather than something to rely on, and don't skip a static fallback for Safari and Firefox.
 
 ```css
 @media (prefers-reduced-motion: no-preference) {
@@ -169,4 +178,6 @@ The `scroll-timeline` CSS feature should also respect motion preferences :
 - [WCAG 2.3.1 Three Flashes or Below Threshold](https://www.w3.org/WAI/WCAG21/Understanding/three-flashes-or-below-threshold.html)
 - [WCAG 2.2.2 Pause, Stop, Hide](https://www.w3.org/WAI/WCAG21/Understanding/pause-stop-hide.html)
 - [MDN: prefers-reduced-motion](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion)
-- [A List Apart — Designing With Reduced Motion](https://alistapart.com/article/designing-safer-web-animation-for-motion-sensitivity/)
+- [A List Apart - Designing With Reduced Motion](https://alistapart.com/article/designing-safer-web-animation-for-motion-sensitivity/)
+
+If you're building an auto-rotating component specifically, [accessible carousels and sliders](/topics/javascript/accessible-carousels-and-sliders/) walks through applying this same media query to pause auto-play.

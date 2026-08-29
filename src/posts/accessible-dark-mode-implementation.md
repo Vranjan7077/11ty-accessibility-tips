@@ -1,14 +1,23 @@
 ---
 title: Accessible dark mode implementation
 description: Implementing dark mode with prefers-color-scheme while maintaining WCAG contrast ratios, respecting user preferences, and providing manual toggles.
+
 topics: CSS
+
+keywords:
+    - accessible dark mode
+    - dark mode accessibility
+    - prefers-color-scheme
+    - wcag contrast dark mode
+    - accessible theming
+    - web accessibility
 ---
 
-Dark mode is more than an aesthetic choice — it's an accessibility feature. Users with light sensitivity, migraines, or visual fatigue benefit from reduced luminance. But a poorly implemented dark mode can create contrast issues that make content harder to read.
+Dark mode is more than an aesthetic choice - it's an accessibility feature. Users with light sensitivity, migraines, or visual fatigue benefit from reduced luminance. But a poorly implemented dark mode can create contrast issues that make content harder to read.
 
 ## Detecting system preference
 
-Use `prefers-color-scheme` to match the user's OS-level preference :
+Use `prefers-color-scheme` to match the user's OS-level preference:
 
 ```css
 :root {
@@ -41,7 +50,7 @@ body {
 
 ## Manual toggle with localStorage
 
-System preference detection alone isn't enough — provide a manual toggle :
+System preference detection alone isn't enough - provide a manual toggle:
 
 ```html
 <button 
@@ -49,7 +58,7 @@ System preference detection alone isn't enough — provide a manual toggle :
     aria-label="Switch to dark mode"
     aria-pressed="false"
 >
-    🌙
+    Moon
 </button>
 ```
 
@@ -73,7 +82,7 @@ toggle.addEventListener('click', () => {
 
 function updateToggle(theme) {
     const isDark = theme === 'dark';
-    toggle.textContent = isDark ? '☀️' : '🌙';
+    toggle.textContent = isDark ? 'Sun' : 'Moon';
     toggle.setAttribute('aria-label', `Switch to ${isDark ? 'light' : 'dark'} mode`);
     toggle.setAttribute('aria-pressed', String(isDark));
 }
@@ -100,7 +109,7 @@ function updateToggle(theme) {
 
 ## Preventing flash of wrong theme
 
-Add a blocking script in `<head>` to set the theme before the page renders :
+Add a blocking script in `<head>` to set the theme before the page renders:
 
 ```html
 <head>
@@ -116,7 +125,7 @@ Add a blocking script in `<head>` to set the theme before the page renders :
 
 ## Contrast requirements
 
-Both light and dark modes must meet WCAG contrast ratios :
+Both light and dark modes must meet WCAG contrast ratios - for the tools and edge cases (text over images, focus indicators) beyond what's specific to theming, see [color contrast and readability](/topics/css/color-contrast-and-readability/):
 
 | Conformance | Text ratio | Large text ratio |
 |-------------|-----------|-----------------|
@@ -131,18 +140,18 @@ Both light and dark modes must meet WCAG contrast ratios :
 }
 ```
 
-Gray text (#64748b) on a dark background (#0f172a) has a contrast ratio of only **3.1:1** — fails AA. Use a lighter gray like `#cbd5e0` (ratio **9.6:1**).
+Gray text (#64748b) on a dark background (#0f172a) has a contrast ratio of only **3.1:1** - fails AA. Use a lighter gray like `#cbd5e0` (ratio **9.6:1**).
 
 ### Testing contrast
 
-Use browser DevTools :
+Use browser DevTools:
 1. Inspect a text element
 2. Click the color swatch in the Styles panel
 3. The contrast ratio is displayed with a pass/fail indicator
 
 ## Images in dark mode
 
-Images designed for light backgrounds can look harsh in dark mode :
+Images designed for light backgrounds can look harsh in dark mode:
 
 ```css
 @media (prefers-color-scheme: dark) {
@@ -157,7 +166,7 @@ Images designed for light backgrounds can look harsh in dark mode :
 }
 ```
 
-For SVG icons, use `currentColor` so they adapt automatically :
+For SVG icons, use `currentColor` so they adapt automatically:
 
 ```css
 .icon {
@@ -167,15 +176,16 @@ For SVG icons, use `currentColor` so they adapt automatically :
 
 ## Common mistakes
 
-- **Not testing contrast in both modes** — Colors that pass in light mode often fail in dark mode.
-- **Pure black backgrounds** — `#000000` is harsh. Use dark grays like `#0f172a` or `#1a202c`.
-- **Pure white text** — `#ffffff` on dark backgrounds causes halation (light bleeding) for users with astigmatism. Use `#e2e8f0` instead.
-- **Forgetting the `<meta name="theme-color">`** — Update it per theme so the browser chrome matches.
-- **No manual override** — Some users want dark mode on a site even when their OS is in light mode.
+- **Not testing contrast in both modes** - Colors that pass in light mode often fail in dark mode.
+- **Pure black backgrounds** - `#000000` is harsh. Use dark grays like `#0f172a` or `#1a202c`.
+- **Pure white text** - `#ffffff` on dark backgrounds causes halation (light bleeding) for users with astigmatism. Use `#e2e8f0` instead.
+- **Forgetting the `<meta name="theme-color">`** - Update it per theme so the browser chrome matches.
+- **No manual override** - Some users want dark mode on a site even when their OS is in light mode.
+- **Reusing the same visually-hidden or focus-ring CSS across themes without checking it** - see [writing accessible CSS](/topics/css/writing-accessible-css/) for patterns that need re-verifying whenever the palette changes.
 
 ## `color-scheme` property
 
-Tell the browser about your supported color schemes so native controls adapt :
+Tell the browser about your supported color schemes so native controls adapt:
 
 ```css
 :root {

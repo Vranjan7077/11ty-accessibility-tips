@@ -1,14 +1,23 @@
 ---
 title: Accessible tables and data
 description: Making data tables accessible with proper headers, scope, captions, and responsive patterns for screen reader users.
+
 topics: HTML
+
+keywords:
+    - accessible tables
+    - data table accessibility
+    - table headers scope
+    - responsive accessible tables
+    - screen reader tables
+    - web accessibility
 ---
 
-Data tables are among the most challenging elements to make accessible. Without proper markup, screen readers cannot convey the relationship between headers and data cells, making complex data incomprehensible.
+Sighted users read a table by scanning across a row and up to its header - a glance does the work. A screen reader has no equivalent glance: without the right markup, it has no way to tell a user that "$410" belongs to "Q2" and "North America" at the same time, and the whole table collapses into a meaningless list of numbers.
 
 ## Basic accessible table structure
 
-Every data table must have :
+Every data table must have:
 
 -   A `<caption>` or `aria-label` to describe its purpose.
 -   `<thead>`, `<tbody>`, and optionally `<tfoot>` to group rows.
@@ -45,12 +54,12 @@ Every data table must have :
 </table>
 ```
 
-> **How screen readers use this :** When a user navigates to a cell like "$410", the screen reader announces "Q2, North America, $410" — combining the column and row headers. Without `scope`, the reader says just "$410", which is meaningless.
+> **How screen readers use this:** When a user navigates to a cell like "$410", the screen reader announces "Q2, North America, $410" - combining the column and row headers. Without `scope`, the reader says just "$410", which is meaningless.
 
 ## `scope` vs `headers` attribute
 
--   **`scope`** — Works for simple tables with a single level of headers.
--   **`headers`** — Required for complex tables with merged cells or multi-level headers.
+-   **`scope`** - Works for simple tables with a single level of headers.
+-   **`headers`** - Required for complex tables with merged cells or multi-level headers.
 
 ```html
 <!-- Complex table with merged headers -->
@@ -83,10 +92,10 @@ Every data table must have :
 
 ## Do not use tables for layout
 
-This is a fundamental rule that is still violated today :
+This is a fundamental rule that is still violated today - the deeper reasoning behind reaching for `<aside>` and `<main>` instead of `<table>`/`<div>` is covered in [semantic HTML vs div soup](/topics/html/semantic-html-vs-div-soup/):
 
 ```html
-<!-- Do not — table used for layout -->
+<!-- Do not - table used for layout -->
 <table>
     <tr>
         <td>Sidebar content</td>
@@ -94,7 +103,7 @@ This is a fundamental rule that is still violated today :
     </tr>
 </table>
 
-<!-- Do — use CSS for layout -->
+<!-- Do - use CSS for layout -->
 <div class="layout">
     <aside>Sidebar content</aside>
     <main>Main content</main>
@@ -105,7 +114,7 @@ This is a fundamental rule that is still violated today :
 
 ## Responsive tables
 
-On narrow screens, data tables are challenging. Common patterns and their accessibility implications :
+On narrow screens, data tables are challenging - the visually-hidden CSS technique used below is explained in more depth in [writing accessible CSS](/topics/css/writing-accessible-css/). Common patterns and their accessibility implications:
 
 ### Horizontal scrolling
 
@@ -132,7 +141,7 @@ On narrow screens, data tables are challenging. Common patterns and their access
 
 ### Stacked cards pattern
 
-For mobile, transform table rows into stacked cards using CSS :
+For mobile, transform table rows into stacked cards using CSS:
 
 ```css
 @media (max-width: 600px) {
@@ -171,7 +180,7 @@ For mobile, transform table rows into stacked cards using CSS :
 
 ### Sortable table columns
 
-When columns are sortable, the sort state must be communicated :
+When columns are sortable, the sort state must be communicated:
 
 ```html
 <th scope="col">
@@ -182,27 +191,27 @@ When columns are sortable, the sort state must be communicated :
 </th>
 ```
 
--   `aria-sort` values : `ascending`, `descending`, `none`, `other`.
+-   `aria-sort` values: `ascending`, `descending`, `none`, `other`.
 -   Announce sort changes via an `aria-live` region.
 
 ### Empty cells
 
-Empty table cells should still contain something for screen readers to navigate :
+Empty table cells should still contain something for screen readers to navigate:
 
 ```html
 <!-- Do not leave completely empty -->
 <td></td>
 
-<!-- Better — indicate no data -->
-<td>—</td>
+<!-- Better - indicate no data -->
+<td> - </td>
 
 <!-- Or use visually hidden text -->
-<td><span class="sr-only">No data available</span>—</td>
+<td><span class="sr-only">No data available</span> - </td>
 ```
 
 ### Tables with interactive content
 
-Tables containing buttons, links, or form controls require extra care :
+Tables containing buttons, links, or form controls require extra care:
 
 -   Each interactive element must have a unique, descriptive accessible name.
 -   Ensure keyboard users can navigate both the table cells and the interactive elements within them.

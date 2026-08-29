@@ -3,5 +3,13 @@
     {% if showDescription and post.data.description %}
         <p class="card__description">{{ post.data.description }}</p>
     {% endif %}
-    <div class="card__topics tag-post">{{ post.data.topics }}</div>
+    {% if post.data.type == 'resource' %}
+        <a class="card__topics tag-post" href="{{ '/resources/' | url }}">Resource</a>
+    {% elif post.data.topicsList and post.data.topicsList.length %}
+        <div class="card__topics">
+            {% for topic in post.data.topicsList %}
+                <a class="tag-post" href="{{ '/topics/' + (topic | slug) + '/' | url }}">{{ topic }}</a>
+            {% endfor %}
+        </div>
+    {% endif %}
 </article>

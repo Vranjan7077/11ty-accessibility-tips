@@ -1,0 +1,81 @@
+:root {
+    --bg-color-100: #1a202c;
+    --bg-color-200: #232b3b;
+    --bg-color-300: #2d3748;
+    --color-100: #cbd5e0;
+    --color-200: #a0aec0;
+    --color-300: #7e8ba3;
+    --color-primary: #818cf8;
+    --color-primary-dim: #6366f1;
+    --color-accent: #70b5f9;
+    --color-tag-bg: rgba(129, 140, 248, 0.12);
+    --color-tag-text: #a5b4fc;
+    --color-surface: rgba(255, 255, 255, 0.03);
+    --color-surface-hover: rgba(255, 255, 255, 0.06);
+    --color-border: rgba(203, 213, 224, 0.1);
+    --color-border-hover: rgba(203, 213, 224, 0.2);
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    color-scheme: dark;
+}
+
+@media (prefers-color-scheme: light) {
+    :root:not([data-theme='dark']) {
+        --bg-color-100: #ffffff;
+        --bg-color-200: #f7fafc;
+        --bg-color-300: #edf2f7;
+        --color-100: #1a202c;
+        --color-200: #4a5568;
+        --color-300: #64748b;
+        --color-primary: #4f46e5;
+        --color-primary-dim: #4338ca;
+        --color-accent: #2563eb;
+        --color-tag-bg: rgba(79, 70, 229, 0.08);
+        --color-tag-text: #4338ca;
+        --color-surface: rgba(0, 0, 0, 0.02);
+        --color-surface-hover: rgba(0, 0, 0, 0.045);
+        --color-border: rgba(26, 32, 44, 0.1);
+        --color-border-hover: rgba(26, 32, 44, 0.18);
+        --shadow-color: rgba(0, 0, 0, 0.1);
+        color-scheme: light;
+    }
+}
+
+:root[data-theme='light'] {
+    --bg-color-100: #ffffff;
+    --bg-color-200: #f7fafc;
+    --bg-color-300: #edf2f7;
+    --color-100: #1a202c;
+    --color-200: #4a5568;
+    --color-300: #64748b;
+    --color-primary: #4f46e5;
+    --color-primary-dim: #4338ca;
+    --color-accent: #2563eb;
+    --color-tag-bg: rgba(79, 70, 229, 0.08);
+    --color-tag-text: #4338ca;
+    --color-surface: rgba(0, 0, 0, 0.02);
+    --color-surface-hover: rgba(0, 0, 0, 0.045);
+    --color-border: rgba(26, 32, 44, 0.1);
+    --color-border-hover: rgba(26, 32, 44, 0.18);
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+    --bg-color-100: #1a202c;
+    --bg-color-200: #232b3b;
+    --bg-color-300: #2d3748;
+    --color-100: #cbd5e0;
+    --color-200: #a0aec0;
+    --color-300: #7e8ba3;
+    --color-primary: #818cf8;
+    --color-primary-dim: #6366f1;
+    --color-accent: #70b5f9;
+    --color-tag-bg: rgba(129, 140, 248, 0.12);
+    --color-tag-text: #a5b4fc;
+    --color-surface: rgba(255, 255, 255, 0.03);
+    --color-surface-hover: rgba(255, 255, 255, 0.06);
+    --color-border: rgba(203, 213, 224, 0.1);
+    --color-border-hover: rgba(203, 213, 224, 0.2);
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    color-scheme: dark;
+}

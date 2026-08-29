@@ -1,14 +1,23 @@
 ---
 title: Writing accessible CSS
 description: CSS techniques for visually hidden content, focus styles, reduced motion, high contrast mode, and avoiding visual-DOM order mismatches.
+
 topics: CSS
+
+keywords:
+    - accessible css
+    - focus styles css
+    - visually hidden css
+    - forced colors css
+    - high contrast mode css
+    - web accessibility
 ---
 
-CSS can make or break accessibility. While it controls the visual layer, it directly impacts readability, navigation, focus management, and the experience for users with various disabilities.
+It's easy to think of CSS as the layer that only affects how things look, but it just as often decides whether something works at all. A hidden focus ring, a `display: none` that quietly strips content from the accessibility tree, text set in `12px` with no way to resize it - none of that shows up in a design review, but all of it locks people out. This post covers the CSS-specific techniques that matter most: hiding content properly, keeping focus visible, sizing text so it scales, and respecting the preferences people have already told their OS about.
 
 ## Visually hidden content (screen reader only)
 
-Sometimes you need text that is read by screen readers but not visible on screen. **Never use `display: none` or `visibility: hidden`** for this — both remove elements from the accessibility tree.
+Sometimes you need text that is read by screen readers but not visible on screen. **Never use `display: none` or `visibility: hidden`** for this - both remove elements from the accessibility tree.
 
 ```css
 .sr-only {
@@ -56,14 +65,14 @@ Focus indicators are **critical** for keyboard navigation. Never remove them wit
     outline: none;
 }
 
-/* Do — use :focus-visible for mouse-friendly, keyboard-accessible focus */
+/* Do - use :focus-visible for mouse-friendly, keyboard-accessible focus */
 :focus-visible {
     outline: 3px solid #005fcc;
     outline-offset: 3px;
     border-radius: 2px;
 }
 
-/* Optional — remove focus ring for mouse clicks */
+/* Optional - remove focus ring for mouse clicks */
 :focus:not(:focus-visible) {
     outline: none;
 }
@@ -89,7 +98,7 @@ body {
 }
 
 small {
-    font-size: 0.875rem; /* 14px — minimum for readable text */
+    font-size: 0.875rem; /* 14px - minimum for readable text */
 }
 ```
 
@@ -97,7 +106,7 @@ small {
 
 -   Optimal line length is **45-75 characters** per line. Wider text is hard to track.
 -   Line height of at least **1.5** for body text (WCAG 1.4.12).
--   Paragraph spacing of at least **1.5× the font size**.
+-   Paragraph spacing of at least **1.5x the font size**.
 
 ```css
 .content {
@@ -114,22 +123,11 @@ small {
 
 ### Reduced motion
 
-```css
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-    }
-}
-```
+Some users have told their operating system they get dizzy or nauseated from motion, and CSS can detect that. This deserves its own deep dive - see [reduced motion and animations](/topics/css/reduced-motion-and-animations/) for the full pattern, including how to handle auto-playing content and why `0.01ms` is used instead of `0s`.
 
 ### High contrast mode
 
-Windows High Contrast Mode overrides most CSS colors. Use **transparent outlines** as fallbacks since they become visible in high contrast :
+Windows High Contrast Mode overrides most CSS colors. Use **transparent outlines** as fallbacks since they become visible in high contrast:
 
 ```css
 button {
@@ -146,7 +144,7 @@ button:focus-visible {
 
 ### Forced colors
 
-The `forced-colors` media query detects when the user has enabled a high contrast theme :
+The `forced-colors` media query detects when the user has enabled a high contrast theme:
 
 ```css
 @media (forced-colors: active) {
@@ -166,29 +164,29 @@ The `forced-colors` media query detects when the user has enabled a high contras
 
 ### Content reordering with CSS
 
-Using `order`, `flex-direction: row-reverse`, or CSS Grid placement can create a disconnect between **visual order** and **DOM order**. Screen readers and keyboard navigation follow the DOM, not the visual layout :
+Using `order`, `flex-direction: row-reverse`, or CSS Grid placement can create a disconnect between **visual order** and **DOM order**. Screen readers and keyboard navigation follow the DOM, not the visual layout:
 
 ```css
-/* Visual order: C, B, A — but keyboard tab order is still A, B, A */
+/* Visual order: C, B, A - but keyboard tab order is still A, B, A */
 .container {
     display: flex;
     flex-direction: row-reverse;
 }
 ```
 
-> **Rule :** Visual order and DOM order must match. If you need to reorder visually, reorder in the HTML instead.
+> **Rule:** Visual order and DOM order must match. If you need to reorder visually, reorder in the HTML instead.
 
 ### `content` property for meaningful text
 
-The CSS `content` property in `::before` and `::after` is **not consistently announced by screen readers**. Never use it for meaningful content :
+The CSS `content` property in `::before` and `::after` is **not consistently announced by screen readers**. Never use it for meaningful content:
 
 ```css
-/* Do not — some screen readers skip this */
+/* Do not - some screen readers skip this */
 .required::after {
     content: ' (required)';
 }
 
-/* Do — put meaningful text in the HTML */
+/* Do - put meaningful text in the HTML */
 ```
 
 ```html
@@ -199,9 +197,9 @@ The CSS `content` property in `::before` and `::after` is **not consistently ann
 
 ### `text-overflow: ellipsis` and truncated content
 
-Truncated text hides information from everyone. Ensure the full text is available :
+Truncated text hides information from everyone. Ensure the full text is available:
 
--   Via a `title` attribute (hover tooltip — not reliable for touch/keyboard).
+-   Via a `title` attribute (hover tooltip - not reliable for touch/keyboard).
 -   Via `aria-label` containing the full text.
 -   Via an expandable mechanism.
 
@@ -213,17 +211,19 @@ Truncated text hides information from everyone. Ensure the full text is availabl
 
 ### Hiding decorative content from screen readers
 
-Use `aria-hidden="true"` for purely decorative elements that would add noise :
+Use `aria-hidden="true"` for purely decorative elements that would add noise:
 
 ```html
-<span aria-hidden="true">🎉</span>
+<span aria-hidden="true">Celebration</span>
 <span aria-hidden="true">|</span>
-<span aria-hidden="true">→</span>
+<span aria-hidden="true">-></span>
 ```
 
 ### Resources
 
 -   [MDN: CSS and Accessibility](https://developer.mozilla.org/en-US/docs/Learn/Accessibility/CSS_and_JavaScript)
 -   [WebAIM: CSS in Action](https://webaim.org/techniques/css/)
--   [WCAG 1.4.12 — Text Spacing](https://www.w3.org/WAI/WCAG21/Understanding/text-spacing.html)
+-   [WCAG 1.4.12 - Text Spacing](https://www.w3.org/WAI/WCAG21/Understanding/text-spacing.html)
 -   [A11y Project: Visually Hidden](https://www.a11yproject.com/posts/how-to-hide-content/)
+
+Related: [color contrast and readability](/topics/css/color-contrast-and-readability/), [accessible dark mode implementation](/topics/css/accessible-dark-mode-implementation/), and [touch target size and spacing](/topics/css/touch-target-size-and-spacing/) round out the rest of the CSS-accessibility picture.

@@ -1,0 +1,17 @@
+<header class="site-header">
+    <div class="site-header__inner">
+        <a class="site-header__brand" href="{{ '/' | url }}">{{ metadata.title }}</a>
+        <nav class="site-nav" aria-label="Primary">
+            <ul class="site-nav__list">
+                {%- set navPages = collections.all | eleventyNavigation -%}
+                {%- for entry in navPages %}
+                    <li class="site-nav__item">
+                        <a class="site-nav__link" href="{{ entry.url | url }}"{% if entry.url == page.url %} aria-current="page"{% endif %}>{{ entry.title }}</a>
+                    </li>
+                {%- endfor %}
+            </ul>
+        </nav>
+        {% include 'layouts/components/search.njk' %}
+        {% include 'layouts/components/theme-toggle.njk' %}
+    </div>
+</header>
